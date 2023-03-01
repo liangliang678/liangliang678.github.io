@@ -24,7 +24,7 @@
 <meta property="og:description" content="第1章：超标量处理器概述1.1 为什么需要超标量加快处理器执行程序的速度：  减少程序中指令的数量 减少每条指令在处理器中执行所需要的周期数 减少处理器的周期时间  超标量处理器靠硬件实现指令并行，VLIW靠编译器和程序员实现指令并行。处理器设计要根据应用领域和场合来决定设计思路，进行折衷（tradeoff）。 1.2 普通处理器的流水线处理器的级数在考虑能效比的情况下有一个理论最优解，但现实情况">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-28T11:04:55.567Z">
+<meta property="article:modified_time" content="2023-03-01T06:45:45.010Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.8k 字
+          10k 字
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          74 分钟
+          86 分钟
         
       </span>
     
@@ -334,7 +334,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年2月28日 晚上
+                    本文最后更新于：2023年3月1日 下午
                   
                 
               </p>
@@ -438,6 +438,19 @@
 <p>基于Issue Queue的replay中，所有的指令在被仲裁电路选中的时候，都不要马上离开发射队列，只有当这条指令确认自己可以正确执行的时候，才会离开发射队列。考虑到store&#x2F;load违例和load&#x2F;load违例的情况，指令要在退休时才能离开发射队列，这大大浪费了发射队列的空间。作为折中，可以将load&#x2F;load违例和store&#x2F;load违例的情况通过重新取指解决。但我们仍需要在D-Cache缺失时，将load指令和之后的指令抹去。无论是抹去之后的所有指令，还是只抹去SW窗口中的指令，都需要识别其与load指令的相关性。</p>
 <p>可以通过对每个物理寄存器添加load-vector的值来识别这种相关性，向量的长度等于in-flight的load指令的数量，表格的容量等于物理寄存器的数量，这种方法的开销较大。另一种较好的方法是，对于每条load指令都使用一个5位的值，表示这条load指令处于流水线的哪个位置，这个值称为LPV。所有被唤醒的源寄存器都会得到这条load指令的LPV值，发射队列中所有源寄存器的LPV每周期逻辑右移一位。load指令到达流水线的Data阶段时，在发射队列中那些LPV的最低位是1的所有源寄存器，都会和这条load指令存在直接或间接的相关性。若LPV的值随指令在流水线中流动，还可以精确地抹掉相关的指令。</p>
 <p>基于Replay Queue的replay中，指令被仲裁电路选中之后，会马上离开发射队列，进入RQ。一般地，非数据捕捉结构的发射队列来说，需要较长时间确定load指令的执行状态，采用该方式能降低发射队列的压力。</p>
+<h2 id="第9章：执行"><a href="#第9章：执行" class="headerlink" title="第9章：执行"></a>第9章：执行</h2><h3 id="9-1-概述"><a href="#9-1-概述" class="headerlink" title="9.1 概述"></a>9.1 概述</h3><p>RISC指令集一般包括算术运算、访问存储器的操作、控制程序流的操作和特殊的指令。执行阶段的另一个重要的部分是旁路网络。</p>
+<h3 id="9-2-FU的类型"><a href="#9-2-FU的类型" class="headerlink" title="9.2 FU的类型"></a>9.2 FU的类型</h3><p>ALU负责对整数类型的数据进行计算。AGU用来计算地址。BRU负责处理程序控制流类型的指令，即计算分支指令的目标地址，并判断分支条件是否成立。BRU的另一功能是进行分支预测的正确性检查。</p>
+<p>MIPS处理器使用了在分支指令执行的同时判断条件的方法，而ARM和PowerPC等处理器在每条指令的编码中都加入了条件码。条件码的存在对寄存器重命名造成困难，预测一条指令总是会执行，在错误时再刷新流水线，会导致处理器的执行效率很低；Intel提出了使用硬件插入额外的指令（select-uOP指令）的解决方案。 </p>
+<h3 id="9-3-旁路网络"><a href="#9-3-旁路网络" class="headerlink" title="9.3 旁路网络"></a>9.3 旁路网络</h3><p>将FU的输出端数据送到FU的输入端、物理寄存器堆、payload RAM等的通路，称为旁路网络。为降低延迟，可在读取寄存器后增加Source Drive阶段，在执行后增加Result Drive阶段。</p>
+<p>当FU的数量增加时，旁路网络的复杂度迅速增加。多个FU可以共享前递总线，因此仲裁电路在进行选择时需要判断FU当前的资源是否可以使用。当需要增加流水级时，旁路网络也会变得更复杂。</p>
+<h3 id="9-4-操作数的选择"><a href="#9-4-操作数的选择" class="headerlink" title="9.4 操作数的选择"></a>9.4 操作数的选择</h3><p>需要ScoreBoard记录所有物理寄存器的信息，包括物理寄存器会在哪个FU中被计算出来，这些值是否已被写回PRF中。执行的过程需要先读取ScoreBoard来判断操作数的来源。更简单的方案是，在将一条指令的计算结果进行广播时，将这条指令的目的寄存器编号也进行广播。通过源寄存器和广播的目的寄存器的比较结果控制源寄存器的多路选择器。</p>
+<h3 id="9-5-Cluster"><a href="#9-5-Cluster" class="headerlink" title="9.5 Cluster"></a>9.5 Cluster</h3><p>将发射队列采用Cluster结构可以减少发射队列的端口个数，加快每个仲裁电路的速度，但跨Cluster的唤醒会经过较长的走线，增加一个bubble。在数据捕捉的结构中，payload RAM可以分Cluster实现；在非数据捕捉的结构中，物理寄存器堆可以分Cluster实现。</p>
+<p>在旁路网络上引入Cluster结构，可以显著降低复杂度，但只有当两条连续的相关指令使用同一Cluster时，才可以背靠背执行。</p>
+<h3 id="9-6-存储器指令的加速"><a href="#9-6-存储器指令的加速" class="headerlink" title="9.6 存储器指令的加速"></a>9.6 存储器指令的加速</h3><h4 id="Memory-Disambiguation"><a href="#Memory-Disambiguation" class="headerlink" title="Memory Disambiguation"></a>Memory Disambiguation</h4><p>在部分的乱序执行中，store指令是按序执行的，处于两个store指令之间的所有load指令可以乱序执行。将已经被仲裁电路选中但还没有退休的指令存储在Store Buffer中。通过Store Buffer进行前递需要判断load和store指令的相对顺序，要对它们进行编号。</p>
+<p>在完全的乱序执行中，load指令的操作数只要准备好了，就可以参与仲裁的过程。若提前执行的load指令得到了错误的结果，则需要抹掉这条load指令和与它有直接或间接相关关系的指令，这称为store&#x2F;load违例。需要精确的load&#x2F;store相关性的预测来提升乱序执行访存的性能。Intel提出了编译器和指令集配合解决load&#x2F;store相关性的方案。</p>
+<h4 id="非阻塞Cache"><a href="#非阻塞Cache" class="headerlink" title="非阻塞Cache"></a>非阻塞Cache</h4><p>非阻塞的Cache允许处理器在发生D-Cache缺失的时候继续执行新的load&#x2F;store指令。支持非阻塞的操作方式需要将产生D-Cache缺失的load&#x2F;store指令保存起来，这个结构称为MSHR。MSHR主要由两部分组成，本体用来保存所有产生首次缺失的load&#x2F;store指令的信息；load&#x2F;store Table存储所有发生缺失的load和store指令的信息。</p>
+<h4 id="关键字优先"><a href="#关键字优先" class="headerlink" title="关键字优先"></a>关键字优先</h4><p>从缺失的字开始读取。</p>
+<h4 id="提前开始"><a href="#提前开始" class="headerlink" title="提前开始"></a>提前开始</h4><p>缺失的字被取出后马上恢复流水线。</p>
 
                 
               </div>
