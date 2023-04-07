@@ -16,12 +16,12 @@
   <meta name="author" content="亮亮678">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MIPS R10000 Alpha 21264 GS464E SonicBOOM">
+    <meta name="description" content="MIPS R10000  Alpha 21264  GS464E  SonicBOOM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="经典超标量乱序处理器核概述">
 <meta property="og:url" content="https://liangliang678.github.io/2023/03/28/index.html">
 <meta property="og:site_name" content="亮亮678的博客">
-<meta property="og:description" content="MIPS R10000 Alpha 21264 GS464E SonicBOOM">
+<meta property="og:description" content="MIPS R10000  Alpha 21264  GS464E  SonicBOOM">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://liangliang678.github.io/2023/03/28/%E5%9B%BE%E7%89%871.png">
 <meta property="og:image" content="https://liangliang678.github.io/2023/03/28/%E5%9B%BE%E7%89%872.png">
@@ -338,10 +338,14 @@
             
               <div class="markdown-body">
                 
-                <h2 id="MIPS-R10000"><a href="#MIPS-R10000" class="headerlink" title="MIPS R10000"></a>MIPS R10000</h2><p><img src="/2023/03/28/%E5%9B%BE%E7%89%871.png" srcset="/img/loading.gif" lazyload alt="MIPS R10000"></p>
-<h2 id="Alpha-21264"><a href="#Alpha-21264" class="headerlink" title="Alpha 21264"></a>Alpha 21264</h2><p><img src="/2023/03/28/%E5%9B%BE%E7%89%872.png" srcset="/img/loading.gif" lazyload alt="Alpha 21264"></p>
-<h2 id="GS464E"><a href="#GS464E" class="headerlink" title="GS464E"></a>GS464E</h2><p><img src="/2023/03/28/%E5%9B%BE%E7%89%873.png" srcset="/img/loading.gif" lazyload alt="GS464E"></p>
-<h2 id="SonicBOOM"><a href="#SonicBOOM" class="headerlink" title="SonicBOOM"></a>SonicBOOM</h2><p><img src="/2023/03/28/%E5%9B%BE%E7%89%874.png" srcset="/img/loading.gif" lazyload alt="SonicBOOM"></p>
+                <h2 id="MIPS-R10000">MIPS R10000</h2>
+<p><img src="/2023/03/28/%E5%9B%BE%E7%89%871.png" srcset="/img/loading.gif" lazyload alt="MIPS R10000"></p>
+<h2 id="Alpha-21264">Alpha 21264</h2>
+<p><img src="/2023/03/28/%E5%9B%BE%E7%89%872.png" srcset="/img/loading.gif" lazyload alt="Alpha 21264"></p>
+<h2 id="GS464E">GS464E</h2>
+<p><img src="/2023/03/28/%E5%9B%BE%E7%89%873.png" srcset="/img/loading.gif" lazyload alt="GS464E"></p>
+<h2 id="SonicBOOM">SonicBOOM</h2>
+<p><img src="/2023/03/28/%E5%9B%BE%E7%89%874.png" srcset="/img/loading.gif" lazyload alt="SonicBOOM"></p>
 
                 
               </div>
@@ -490,6 +494,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -683,6 +693,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
