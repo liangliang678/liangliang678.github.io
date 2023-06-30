@@ -16,21 +16,21 @@
   <meta name="author" content="亮亮678">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Markdown    元素 Markdown语法 基础语法     标题 # H1  ## H2  ### H3 √   粗体 **bold text** √   斜体 *italicized text* √   删除线 ~~The world is flat.~~ ×   代码 &#96;code&#96; √   代码块 &#96;&#96;&#96;  &amp;#123;  &quot;firstName&quot;: &quot;J">
+    <meta name="description" content="会话管理    操作 命令 快捷键     新建会话 tmux new -s &lt;session-name&gt;    分离会话 tmux detach ctrl+b d   接入会话 tmux attach -t &lt;session-name&gt;    杀死会话 tmux kill-session    切换会话 tmux switch -t &lt;session-name&amp;gt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="标记语言速查表">
-<meta property="og:url" content="https://liangliang678.github.io/2023/06/15/index.html">
+<meta property="og:title" content="tmux速查表">
+<meta property="og:url" content="https://liangliang678.github.io/2023/06/30/index.html">
 <meta property="og:site_name" content="亮亮678的博客">
-<meta property="og:description" content="Markdown    元素 Markdown语法 基础语法     标题 # H1  ## H2  ### H3 √   粗体 **bold text** √   斜体 *italicized text* √   删除线 ~~The world is flat.~~ ×   代码 &#96;code&#96; √   代码块 &#96;&#96;&#96;  &amp;#123;  &quot;firstName&quot;: &quot;J">
+<meta property="og:description" content="会话管理    操作 命令 快捷键     新建会话 tmux new -s &lt;session-name&gt;    分离会话 tmux detach ctrl+b d   接入会话 tmux attach -t &lt;session-name&gt;    杀死会话 tmux kill-session    切换会话 tmux switch -t &lt;session-name&amp;gt">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-15T10:56:42.085Z">
+<meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-30T06:44:26.655Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>标记语言速查表 - 亮亮678的博客</title>
+  <title>tmux速查表 - 亮亮678的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="标记语言速查表"></span>
+            <span id="subtitle" data-typed-text="tmux速查表"></span>
           
         </div>
 
@@ -198,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-15 00:00" pubdate>
-          2023-06-15
+        <time datetime="2023-06-30 00:00" pubdate>
+          2023-06-30
         </time>
       </span>
     
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          460 字
+          359 字
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -287,7 +287,7 @@
       
         <a href="/2023/06/15/" title="标记语言速查表"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">标记语言速查表</span>
         </a>
       
@@ -296,7 +296,7 @@
       
         <a href="/2023/06/30/" title="tmux速查表"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">tmux速查表</span>
         </a>
       
@@ -320,12 +320,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">标记语言速查表</h1>
+            <h1 style="display: none">tmux速查表</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月15日 晚上
+                    本文最后更新于：2023年6月30日 下午
                   
                 
               </p>
@@ -333,80 +333,89 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Markdown">Markdown</h2>
+                <h2 id="会话管理">会话管理</h2>
 <table>
 <thead>
 <tr>
-<th>元素</th>
-<th>Markdown语法</th>
-<th>基础语法</th>
+<th>操作</th>
+<th>命令</th>
+<th>快捷键</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>标题</td>
-<td><code># H1</code> <br> <code>## H2</code> <br> <code>### H3</code></td>
-<td>√</td>
+<td>新建会话</td>
+<td><code>tmux new -s &lt;session-name&gt;</code></td>
+<td></td>
 </tr>
 <tr>
-<td>粗体</td>
-<td><code>**bold text**</code></td>
-<td>√</td>
+<td>分离会话</td>
+<td><code>tmux detach</code></td>
+<td>ctrl+b d</td>
 </tr>
 <tr>
-<td>斜体</td>
-<td><code>*italicized text*</code></td>
-<td>√</td>
+<td>接入会话</td>
+<td><code>tmux attach -t &lt;session-name&gt;</code></td>
+<td></td>
 </tr>
 <tr>
-<td>删除线</td>
-<td><code>~~The world is flat.~~</code></td>
-<td>×</td>
+<td>杀死会话</td>
+<td><code>tmux kill-session</code></td>
+<td></td>
 </tr>
 <tr>
-<td>代码</td>
-<td><code>`code`</code></td>
-<td>√</td>
+<td>切换会话</td>
+<td><code>tmux switch -t &lt;session-name&gt;</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="窗格操作">窗格操作</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>划分上下</td>
+<td><code>tmux split-window</code></td>
+<td>ctrl+b &quot;</td>
 </tr>
 <tr>
-<td>代码块</td>
-<td><code>```</code> <br> <code>&#123;</code> <br> <code>&quot;firstName&quot;: &quot;John&quot;,</code> <br> <code>&quot;lastName&quot;: &quot;Smith&quot;,</code> <br> <code>&quot;age&quot;: 25</code> <br> <code>&#125;</code> <br> <code>```</code></td>
-<td>×</td>
+<td>划分左右</td>
+<td><code>tmux split-window -h</code></td>
+<td>ctrl+b %</td>
 </tr>
 <tr>
-<td>引用块</td>
-<td><code>&gt; blockquote</code></td>
-<td>√</td>
+<td>移动光标</td>
+<td><code>tmux select-pane -U/D/L/R</code></td>
+<td>ctrl+b arrow</td>
+</tr>
+</tbody>
+</table>
+<h2 id="窗口管理">窗口管理</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新建窗口</td>
+<td><code>tmux split-window</code></td>
+<td>ctrl+b c</td>
 </tr>
 <tr>
-<td>表格</td>
-<td><code>| Syntax | Description |</code> <br> <code>| ----------- | ----------- |</code> <br> <code>| Header | Title |</code> <br> <code>| Paragraph | Text |</code></td>
-<td>×</td>
-</tr>
-<tr>
-<td>有序列表</td>
-<td><code>1. First item</code> <br> <code>2. Second item</code> <br> <code>3. Third item</code></td>
-<td>√</td>
-</tr>
-<tr>
-<td>无序列表</td>
-<td><code>- First item</code> <br> <code>- Second item</code> <br> <code>- Third item</code></td>
-<td>√</td>
-</tr>
-<tr>
-<td>分割线</td>
-<td><code>---</code></td>
-<td>√</td>
-</tr>
-<tr>
-<td>链接</td>
-<td><code>[title](https://www.example.com)</code></td>
-<td>√</td>
-</tr>
-<tr>
-<td>图片</td>
-<td><code>![alt text](image.jpg)</code></td>
-<td>√</td>
+<td>切换窗口</td>
+<td><code>tmux select-window -t &lt;window-name&gt;</code></td>
+<td>ctrl+b number</td>
 </tr>
 </tbody>
 </table>
@@ -448,8 +457,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>标记语言速查表</div>
-      <div>https://liangliang678.github.io/2023/06/15/</div>
+      <div>tmux速查表</div>
+      <div>https://liangliang678.github.io/2023/06/30/</div>
     </div>
     <div class="license-meta">
       
@@ -461,7 +470,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月15日</div>
+          <div>2023年6月30日</div>
         </div>
       
       
@@ -493,18 +502,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/30/" title="tmux速查表">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">tmux速查表</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/28/" title="上海迪士尼4月28日总结">
-                        <span class="hidden-mobile">上海迪士尼4月28日总结</span>
+                      <a href="/2023/06/15/" title="标记语言速查表">
+                        <span class="hidden-mobile">标记语言速查表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

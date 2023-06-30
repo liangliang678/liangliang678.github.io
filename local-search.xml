@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>tmux速查表</title>
+    <link href="/2023/06/30/"/>
+    <url>/2023/06/30/</url>
+    
+    <content type="html"><![CDATA[<h2 id="会话管理">会话管理</h2><table><thead><tr><th>操作</th><th>命令</th><th>快捷键</th></tr></thead><tbody><tr><td>新建会话</td><td><code>tmux new -s &lt;session-name&gt;</code></td><td></td></tr><tr><td>分离会话</td><td><code>tmux detach</code></td><td>ctrl+b d</td></tr><tr><td>接入会话</td><td><code>tmux attach -t &lt;session-name&gt;</code></td><td></td></tr><tr><td>杀死会话</td><td><code>tmux kill-session</code></td><td></td></tr><tr><td>切换会话</td><td><code>tmux switch -t &lt;session-name&gt;</code></td><td></td></tr></tbody></table><h2 id="窗格操作">窗格操作</h2><table><thead><tr><th>操作</th><th>命令</th><th>快捷键</th></tr></thead><tbody><tr><td>划分上下</td><td><code>tmux split-window</code></td><td>ctrl+b &quot;</td></tr><tr><td>划分左右</td><td><code>tmux split-window -h</code></td><td>ctrl+b %</td></tr><tr><td>移动光标</td><td><code>tmux select-pane -U/D/L/R</code></td><td>ctrl+b arrow</td></tr></tbody></table><h2 id="窗口管理">窗口管理</h2><table><thead><tr><th>操作</th><th>命令</th><th>快捷键</th></tr></thead><tbody><tr><td>新建窗口</td><td><code>tmux split-window</code></td><td>ctrl+b c</td></tr><tr><td>切换窗口</td><td><code>tmux select-window -t &lt;window-name&gt;</code></td><td>ctrl+b number</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术笔记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>标记语言速查表</title>
     <link href="/2023/06/15/"/>
     <url>/2023/06/15/</url>
