@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>vim速查表</title>
+    <link href="/2023/07/01/"/>
+    <url>/2023/07/01/</url>
+    
+    <content type="html"><![CDATA[<h2 id="打开文件">打开文件</h2><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>移动到指定行</td><td><code>vim +行数 文件路径</code></td></tr><tr><td>高亮显示关键字</td><td><code>vim +/关键字 文件路径</code></td></tr></tbody></table><h2 id="命令模式">命令模式</h2><h3 id="移动光标">移动光标</h3><table><thead><tr><th>操作</th><th>作用</th></tr></thead><tbody><tr><td>h/←</td><td>左移</td></tr><tr><td>l/→</td><td>右移</td></tr><tr><td>k/↑</td><td>上移</td></tr><tr><td>j/↓</td><td>下移</td></tr><tr><td>w</td><td>后移</td></tr><tr><td>b</td><td>前移</td></tr><tr><td>0/^/home</td><td>行首</td></tr><tr><td>$/end</td><td>行末</td></tr><tr><td>ctrl+f/pgup</td><td>上页</td></tr><tr><td>ctrl+b/pgdn</td><td>下页</td></tr><tr><td>gg</td><td>首行</td></tr><tr><td>G</td><td>末行</td></tr><tr><td>nG</td><td>n行</td></tr></tbody></table><h3 id="复制粘贴删除">复制粘贴删除</h3><table><thead><tr><th>操作</th><th>作用</th></tr></thead><tbody><tr><td>x</td><td>删除后一个</td></tr><tr><td>X</td><td>删除前一个</td></tr><tr><td>dd</td><td>剪切一行</td></tr><tr><td>yy</td><td>复制一行</td></tr><tr><td>p</td><td>粘贴到下一行</td></tr><tr><td>P</td><td>粘贴到上一行</td></tr><tr><td>z</td><td>撤销</td></tr><tr><td>ctrl+r</td><td>恢复</td></tr></tbody></table><h3 id="进入其他模式">进入其他模式</h3><table><thead><tr><th>操作</th><th>作用</th></tr></thead><tbody><tr><td>i</td><td>输入模式</td></tr><tr><td>o</td><td>输入新行</td></tr><tr><td>R</td><td>替换模式</td></tr></tbody></table><h2 id="末行模式">末行模式</h2><h3 id="搜索替换">搜索替换</h3><table><thead><tr><th>操作</th><th>作用</th></tr></thead><tbody><tr><td>/字符串 + 回车</td><td>向下搜索</td></tr><tr><td>n</td><td>下一个</td></tr><tr><td>?字符串 + 回车</td><td>向上搜索</td></tr><tr><td>N</td><td>上一个</td></tr><tr><td>:%s/word1/word2/g</td><td>全局替换</td></tr><tr><td>:%s/word1/word2/gc</td><td>单个替换</td></tr></tbody></table><h3 id="文件操作">文件操作</h3><table><thead><tr><th>操作</th><th>作用</th></tr></thead><tbody><tr><td>:w</td><td>保存</td></tr><tr><td>:q</td><td>退出</td></tr><tr><td>:wq</td><td>保存并退出</td></tr><tr><td>:q!</td><td>不保存退出</td></tr><tr><td>:set nu</td><td>显示行号</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术笔记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>tmux速查表</title>
     <link href="/2023/06/30/"/>
     <url>/2023/06/30/</url>
