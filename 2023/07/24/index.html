@@ -16,21 +16,21 @@
   <meta name="author" content="亮亮678">
   <meta name="keywords" content="">
   
-    <meta name="description" content="打开文件    操作 命令     移动到指定行 vim +行数 文件路径   高亮显示关键字 vim +&#x2F;关键字 文件路径    命令模式 移动光标    操作 作用     h&#x2F;← 左移   l&#x2F;→ 右移   k&#x2F;↑ 上移   j&#x2F;↓ 下移   w 后移   b 前移   0&#x2F;^&#x2F;home 行首   $&#x2F;end 行末   ctrl+f&#x2F;pgup 上页   ctrl+b&#x2F;pgdn 下页   gg">
+    <meta name="description" content="SMS (2006 ISCA) SMS记录每个区域的访问模式，并在该区域的第一次访问时预取区域内其他Cache行。在训练过程中，其使用AGT表记录特定区域的访问模式：其中Filter表以区域的Tag为索引，记录其第一次访问的PC和偏移；Acc表以区域的Tag为索引，记录超过一次访问的区域，比Filter表多了Pattern域，以bitmap的形式记录访问模式。当该区域内的Cache行被替换时，训练">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vim速查表">
-<meta property="og:url" content="https://liangliang678.github.io/2023/07/01/index.html">
+<meta property="og:title" content="预取相关论文综述">
+<meta property="og:url" content="https://liangliang678.github.io/2023/07/24/index.html">
 <meta property="og:site_name" content="亮亮678的博客">
-<meta property="og:description" content="打开文件    操作 命令     移动到指定行 vim +行数 文件路径   高亮显示关键字 vim +&#x2F;关键字 文件路径    命令模式 移动光标    操作 作用     h&#x2F;← 左移   l&#x2F;→ 右移   k&#x2F;↑ 上移   j&#x2F;↓ 下移   w 后移   b 前移   0&#x2F;^&#x2F;home 行首   $&#x2F;end 行末   ctrl+f&#x2F;pgup 上页   ctrl+b&#x2F;pgdn 下页   gg">
+<meta property="og:description" content="SMS (2006 ISCA) SMS记录每个区域的访问模式，并在该区域的第一次访问时预取区域内其他Cache行。在训练过程中，其使用AGT表记录特定区域的访问模式：其中Filter表以区域的Tag为索引，记录其第一次访问的PC和偏移；Acc表以区域的Tag为索引，记录超过一次访问的区域，比Filter表多了Pattern域，以bitmap的形式记录访问模式。当该区域内的Cache行被替换时，训练">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-30T07:10:41.200Z">
+<meta property="article:published_time" content="2023-07-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-27T07:37:40.974Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>vim速查表 - 亮亮678的博客</title>
+  <title>预取相关论文综述 - 亮亮678的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vim速查表"></span>
+            <span id="subtitle" data-typed-text="预取相关论文综述"></span>
           
         </div>
 
@@ -198,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-01 00:00" pubdate>
-          2023-07-01
+        <time datetime="2023-07-24 00:00" pubdate>
+          2023-07-24
         </time>
       </span>
     
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          346 字
+          3.8k 字
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          3 分钟
+          32 分钟
         
       </span>
     
@@ -266,17 +266,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="技术笔记"
-        id="heading-53cbe91c4a75476fbe971615e91cbb68" role="tab" data-toggle="collapse" href="#collapse-53cbe91c4a75476fbe971615e91cbb68"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="体系结构学习"
+        id="heading-f51c46f9b18ce401736f7462787c3287" role="tab" data-toggle="collapse" href="#collapse-f51c46f9b18ce401736f7462787c3287"
         aria-expanded="true"
       >
-        技术笔记
-        <span class="list-group-count">(3)</span>
+        体系结构学习
+        <span class="list-group-count">(4)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-53cbe91c4a75476fbe971615e91cbb68"
-           role="tabpanel" aria-labelledby="heading-53cbe91c4a75476fbe971615e91cbb68">
+      <div class="category-collapse collapse show" id="collapse-f51c46f9b18ce401736f7462787c3287"
+           role="tabpanel" aria-labelledby="heading-f51c46f9b18ce401736f7462787c3287">
         
         
           
@@ -285,28 +285,37 @@
     
       
       
-        <a href="/2023/06/15/" title="标记语言速查表"
+        <a href="/2022/09/12/" title="历时10个月合作开发超标量乱序处理器核的一些感想"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">标记语言速查表</span>
+          <span class="category-post">历时10个月合作开发超标量乱序处理器核的一些感想</span>
         </a>
       
     
       
       
-        <a href="/2023/06/30/" title="tmux速查表"
+        <a href="/2022/09/22/" title="对体系结构知识体系的理解"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">tmux速查表</span>
+          <span class="category-post">对体系结构知识体系的理解</span>
         </a>
       
     
       
       
-        <a href="/2023/07/01/" title="vim速查表"
+        <a href="/2023/03/28/" title="经典超标量乱序处理器核概述"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">经典超标量乱序处理器核概述</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/24/" title="预取相关论文综述"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">vim速查表</span>
+          <span class="category-post">预取相关论文综述</span>
         </a>
       
     
@@ -329,12 +338,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vim速查表</h1>
+            <h1 style="display: none">预取相关论文综述</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月30日 下午
+                    本文最后更新于：2023年9月27日 下午
                   
                 
               </p>
@@ -342,222 +351,54 @@
             
               <div class="markdown-body">
                 
-                <h2 id="打开文件">打开文件</h2>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>命令</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>移动到指定行</td>
-<td><code>vim +行数 文件路径</code></td>
-</tr>
-<tr>
-<td>高亮显示关键字</td>
-<td><code>vim +/关键字 文件路径</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="命令模式">命令模式</h2>
-<h3 id="移动光标">移动光标</h3>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>h/←</td>
-<td>左移</td>
-</tr>
-<tr>
-<td>l/→</td>
-<td>右移</td>
-</tr>
-<tr>
-<td>k/↑</td>
-<td>上移</td>
-</tr>
-<tr>
-<td>j/↓</td>
-<td>下移</td>
-</tr>
-<tr>
-<td>w</td>
-<td>后移</td>
-</tr>
-<tr>
-<td>b</td>
-<td>前移</td>
-</tr>
-<tr>
-<td>0/^/home</td>
-<td>行首</td>
-</tr>
-<tr>
-<td>$/end</td>
-<td>行末</td>
-</tr>
-<tr>
-<td>ctrl+f/pgup</td>
-<td>上页</td>
-</tr>
-<tr>
-<td>ctrl+b/pgdn</td>
-<td>下页</td>
-</tr>
-<tr>
-<td>gg</td>
-<td>首行</td>
-</tr>
-<tr>
-<td>G</td>
-<td>末行</td>
-</tr>
-<tr>
-<td>nG</td>
-<td>n行</td>
-</tr>
-</tbody>
-</table>
-<h3 id="复制粘贴删除">复制粘贴删除</h3>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x</td>
-<td>删除后一个</td>
-</tr>
-<tr>
-<td>X</td>
-<td>删除前一个</td>
-</tr>
-<tr>
-<td>dd</td>
-<td>剪切一行</td>
-</tr>
-<tr>
-<td>yy</td>
-<td>复制一行</td>
-</tr>
-<tr>
-<td>p</td>
-<td>粘贴到下一行</td>
-</tr>
-<tr>
-<td>P</td>
-<td>粘贴到上一行</td>
-</tr>
-<tr>
-<td>z</td>
-<td>撤销</td>
-</tr>
-<tr>
-<td>ctrl+r</td>
-<td>恢复</td>
-</tr>
-</tbody>
-</table>
-<h3 id="进入其他模式">进入其他模式</h3>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>i</td>
-<td>输入模式</td>
-</tr>
-<tr>
-<td>o</td>
-<td>输入新行</td>
-</tr>
-<tr>
-<td>R</td>
-<td>替换模式</td>
-</tr>
-</tbody>
-</table>
-<h2 id="末行模式">末行模式</h2>
-<h3 id="搜索替换">搜索替换</h3>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/字符串 + 回车</td>
-<td>向下搜索</td>
-</tr>
-<tr>
-<td>n</td>
-<td>下一个</td>
-</tr>
-<tr>
-<td>?字符串 + 回车</td>
-<td>向上搜索</td>
-</tr>
-<tr>
-<td>N</td>
-<td>上一个</td>
-</tr>
-<tr>
-<td>:%s/word1/word2/g</td>
-<td>全局替换</td>
-</tr>
-<tr>
-<td>:%s/word1/word2/gc</td>
-<td>单个替换</td>
-</tr>
-</tbody>
-</table>
-<h3 id="文件操作">文件操作</h3>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>:w</td>
-<td>保存</td>
-</tr>
-<tr>
-<td>:q</td>
-<td>退出</td>
-</tr>
-<tr>
-<td>:wq</td>
-<td>保存并退出</td>
-</tr>
-<tr>
-<td>:q!</td>
-<td>不保存退出</td>
-</tr>
-<tr>
-<td>:set nu</td>
-<td>显示行号</td>
-</tr>
-</tbody>
-</table>
+                <h2 id="SMS-2006-ISCA">SMS (2006 ISCA)</h2>
+<p>SMS记录每个区域的访问模式，并在该区域的第一次访问时预取区域内其他Cache行。在训练过程中，其使用AGT表记录特定区域的访问模式：其中Filter表以区域的Tag为索引，记录其第一次访问的PC和偏移；Acc表以区域的Tag为索引，记录超过一次访问的区域，比Filter表多了Pattern域，以bitmap的形式记录访问模式。当该区域内的Cache行被替换时，训练结束。训练成功的表项会被记录到PHT，用于之后的预取。</p>
+<h2 id="VLDP-2015-MICRO">VLDP (2015 MICRO)</h2>
+<p>VLDP以页为单位，在DHB中存储每页访问地址的最近四个delta，并用1个delta、2个delta、3个delta去索引全局的DPT，得到预测的delta。VLDP会优先选择更长的历史预测的delta，其思想类似于TAGE预测器。也可以通过预测的delta去递归地访问DPT，来增加预取距离。</p>
+<h2 id="SPP-2016-MICRO">SPP (2016 MICRO)</h2>
+<p>SPP的基本思想和VLDP相似，其以页为单位，在ST中以压缩的形式记录每页的访问历史（至多4个delta），并以历史为索引查找全局的PT，并递归查找PT以增加预取距离。递归查找的深度受全局准确率和每次预取的准确率的影响，每次预取的准确率是PT中记录的delta的频率，全局精确率由Filter统计。另外，GHR记录跨页的预取地址，并在每页第一次访问时查找GHR，继承上一页的访问历史。</p>
+<h2 id="BOP-2016-HPCA">BOP (2016 HPCA)</h2>
+<p>offset预取器不同于stream预取器，其不会捕捉流的访问模式。BOP是Next-Line的扩展，其通过训练找到最佳的offset，该预取器是第二届预取锦标赛的冠军。在训练过程中，BOP遍历尝试所有的offset数次，每次将合适的offset加分，训练结束时取最高分的offset作为训练结果。在RR表中记录已经完成预取的Cache行的触发地址（预取地址Y，触发地址Y-offset），当L2访问地址X到达时，检查X-offset是否在RR表中来确定offset是否合适。</p>
+<h2 id="DOL-2018-ISCA">DOL (2018 ISCA)</h2>
+<p>面向不同模式的预取算法不断被提出，它们有着不同的覆盖率和准确率。本篇论文将多个小范围、高准确率的预取器结合在一起，通过分工的方式实现了较大的覆盖率和较高的准确率。我们可以将已有的访存模式分为四类：stride访问、pointer-chasing访问、iregular访问和region访问。通过复合式预取器，我们可以实现更高的存储效率，优先服务置信度高的预取以减小额外开销，并实现更好的灵活性。</p>
+<p>复合预取器结合了以下预取器：</p>
+<ol>
+<li>T2预取器：经典的stride预取</li>
+<li>P1预取器：<code>*B[i]</code>和pointer-chasing的预取</li>
+<li>C1预取器：region预取</li>
+</ol>
+<p>使用一个协调器来根据指令选择其中的某个预取器，该协调器使用简单的优先级关系进行选择。现有的集中式预取器并不能很好的成为该复合预取器的子模块，因为它们的大部分工作已经被T2预取器承担。适合作为子模块的预测器应该专注某一个模式的预取（小而美而不是大而全）。</p>
+<h2 id="Bingo-2019-HPCA">Bingo (2019 HPCA)</h2>
+<p>Bingo是SMS的扩展，其不仅将PC+Offset作为触发条件，还将更严格的PC+Addr（或更宽松的PC/Addr/Offset）作为触发条件，并优先使用更严格的触发条件对应的访存模式进行预取。虽然使用了不同的触发条件，但Bingo只需要使用一张表来记录访存模式，因为由PC+Addr可以推算出PC+Offset。由PC+Offset的哈希值作为索引，并以PC+Addr作为Tag，查询时优先比较完整的Tag，若无满足，再比较只包含PC+Offset的Tag。</p>
+<h2 id="IPCP-2020-ISCA">IPCP (2020 ISCA)</h2>
+<p>IPCP是第三届预取锦标赛的冠军，其出发点是根据IP对每条Load指令的访存模式进行分类，针对每种访存模式设计一种预取器：</p>
+<ul>
+<li>CS预取器：固定stride类型的Load指令</li>
+<li>CPLX预取器：复杂stride类型的Load指令，使用<code>signature</code>域来记录历史stride，索引到预测的stride</li>
+<li>GS预取器：基于全局的访存信息，标记区域内被访问到的Cache行，并通过继承关系将相邻的区域标记为“稠密”以触发预取；该预取器会将全局信息更新到IP表中每个IP的对应域</li>
+</ul>
+<p>若一个IP命中了多个预取器，则GS优先于CS优先于CPLX。IPCP也可应用于L2 Cache以进一步提高性能。</p>
+<h2 id="Berti-2022-MICRO">Berti (2022 MICRO)</h2>
+<p>stride代表两个连续的访存地址之间的差值，delta代表之前的访存地址与当前访存地址之间的差值。IPCP中的CPLX预取器存在预取及时性方面的问题，且有一些不能识别的pattern；而目前的delta预取器都基于全局的delta，局限性很强。</p>
+<p>Berti基于每条指令训练其最佳的delta：对于一条指令的每次访存，在History Table中记录其地址和时间戳，每次访存将找到的至多8个及时的delta填入表中，并计算每个delta的覆盖率。访存指令执行时，根据每个delta的覆盖率和L1 MSHR的占用率将预取请求发送到不同的Cache层次。</p>
+<h2 id="IMP-2015-MICRO">IMP (2015 MICRO)</h2>
+<p>不规则的内存访问在目前的应用中很常见，特别是在机器学习、图分析和稀疏矩阵中。访问图中的相邻节点或稀疏矩阵中非零数据对应的数组元素通常通过间接索引的方式完成，如<code>A[B[i]]</code>。其中B数组存放在连续的地址空间内，可以通过stride预取器完成预取；而L1 DCache不能容纳整个A数组，且对A数组的访问不是连续的，造成大量的Cache缺失。<br>
+<code>A[B[i]]</code>形式的访问可记为<code>ADDR(A[B[i]]) = (B[i] &lt;&lt; shift) + BaseAddr</code>。在实践中，<code>B[i]</code>通常是提前算好的，那么我们可以在软件访问<code>B[i]</code>时预取<code>B[i+Δ]</code>并根据学习到的<code>shift</code>和<code>BaseAddr</code>预取<code>A[B[i+Δ]]</code>。<br>
+IMP的工作流程分为三步：</p>
+<ol>
+<li>传统预取器中的stride表捕捉stride访问模式</li>
+<li>检测与stride访问模式相关联的间接访问模式。捕捉索引-地址对来计算<code>shift</code>和<code>BaseAddr</code>并存在Indirect表中</li>
+<li>根据Indirect表中的内容进行预取<br>
+捕捉索引-地址对是流程中最困难的部分，观察到索引一定是由stride预取得到的，地址一般是索引访问后短时间内Cache缺失的地址，我们的IPD的工作模式如下：表中的每个条目负责一个间接访问模式，当一个stride预取的<code>B[i]</code>被访问时，将<code>B[i]</code>的值写到<code>idx1</code>域中，侦听之后的Cache缺失地址，根据所有可能的<code>shift</code>计算对应的<code>BaseAddr</code>并记录；当这个stride预取的<code>B[i+1]</code>被访问时，将<code>B[i+1]</code>的值写到<code>idx2</code>域中，侦听之后的Cache缺失地址，根据所有可能的shift计算对应的BaseAddr并记录；比较两次记录在相同<code>shift</code>下的<code>BaseAddr</code>是否有一样的，若存在则在Indirect表中记录对应的<code>shift</code>和<code>BaseAddr</code>并删除IPD中的条目，若不存在则等待<code>B[i+2]</code>被访问后抛弃这个条目。随后在Indirect表中记录之后的访存命中该间接访问模式的次数，达到一定的置信度阈值后即开始预取，并逐渐增加预取的距离。另外，作者也提出了针对嵌套循环中的间接访问模式和多路、多层间接访问模式的优化，针对Sector Cache实现粒度预测器的优化。</li>
+</ol>
+<h2 id="Gretch（2021-TACO）">Gretch（2021 TACO）</h2>
+<p>在不同的图分析框架中，有不同类型的数据相关的内存访问（DDA），例如<code>A[B[i]]</code>和<code>*B[i]</code>。先前的工作大多只关注其中的一种，而且需要软件制导，也不适用于乱序的内存访问。<br>
+Gretch有四个关键组件：stride预取器，stride变化的通知机制，ADT和RT来存储识别访问模式需要的数据和生成预取请求，独立的训练逻辑。 当Stride预取器通知步长发生变化时，进入记录模式，此时ADT记录每条指令的最初两个Cache缺失的地址和数据；当ADT满或者Cache缺失过多时，进入训练模式，基于ADT中数据识别基于指针的（<code>*B[i]</code>）和基于数组间接访问的（<code>A[B[i]]</code>）访问模式，记录到RT中。相比于IMP，Gretch使用了乘除法器来识别所有的步长。在RT中的表项达到一定的置信度时，即开始预取。</p>
+<p>Gretch有四个关键组件：stride预取器，stride变化的通知机制，ADT和RT来存储识别访问模式需要的数据和生成预取请求，独立的训练逻辑。 当Stride预取器通知步长发生变化时，进入记录模式，此时ADT记录每条指令的最初两个Cache缺失的地址和数据；当ADT满或者Cache缺失过多时，进入训练模式，基于ADT中数据识别基于指针的（<code>*B[i]</code>）和基于数组间接访问的（<code>A[B[i]]</code>）访问模式，记录到RT中。相比于IMP，Gretch使用了乘除法器来识别所有的步长。在RT中的表项达到一定的置信度时，即开始预取。</p>
+<h2 id="FDP-2007-HPCA">FDP (2007 HPCA)</h2>
+<p>使用预取的准确率、及时性和Cache污染情况来控制预取的激进度和预取的Cache行在LRU算法中的初始位置。</p>
+<h2 id="HPAC-2009-MICRO">HPAC (2009 MICRO)</h2>
+<p>使用预取的准确率、使用DRAM Bank情况、造成其他核Cache污染的情况、造成其他核DRAM Bank阻塞的情况来控制预取的激进度并覆盖核内的预取调节机制。</p>
 
                 
               </div>
@@ -576,7 +417,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="category-chain-item">技术笔记</a>
+  <a href="/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/" class="category-chain-item">体系结构学习</a>
   
   
 
@@ -596,8 +437,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vim速查表</div>
-      <div>https://liangliang678.github.io/2023/07/01/</div>
+      <div>预取相关论文综述</div>
+      <div>https://liangliang678.github.io/2023/07/24/</div>
     </div>
     <div class="license-meta">
       
@@ -609,7 +450,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月1日</div>
+          <div>2023年7月24日</div>
         </div>
       
       
@@ -641,18 +482,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/24/" title="预取相关论文综述">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">预取相关论文综述</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/30/" title="tmux速查表">
-                        <span class="hidden-mobile">tmux速查表</span>
+                      <a href="/2023/07/01/" title="vim速查表">
+                        <span class="hidden-mobile">vim速查表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
