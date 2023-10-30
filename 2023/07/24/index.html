@@ -16,15 +16,15 @@
   <meta name="author" content="亮亮678">
   <meta name="keywords" content="">
   
-    <meta name="description" content="除了常规的Stride预取器，论文中提出了很多复合预取器，包括DOL、IPCP等；单独的预取算法主要有以下几类：  基于bitmap的访存模式记录：包括SMS、Bingo、PMP等； 基于delta序列的访存模式记录：包括VLDP、SPP等； 基于offset的访存行为记录：包括BOP、Berti等； 数据相关的预取：包括IMP、Gretch等； 另外，还有预取的激进度调节算法（FDP、HPAC）">
+    <meta name="description" content="除了常规的Stride预取器，论文中提出了很多复合预取器，包括DOL、IPCP等；单独的预取算法主要有以下几类：  基于bitmap的访存模式记录：包括SMS、Bingo、PMP等； 基于delta序列的访存模式记录：包括VLDP、SPP等； 基于offset的访存行为记录：包括BOP、Berti等； 数据相关的预取：包括IMP、Gretch等；  另外，还有预取的激进度调节算法（FDP、HPAC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="预取相关论文综述">
 <meta property="og:url" content="https://liangliang678.github.io/2023/07/24/index.html">
 <meta property="og:site_name" content="亮亮678的博客">
-<meta property="og:description" content="除了常规的Stride预取器，论文中提出了很多复合预取器，包括DOL、IPCP等；单独的预取算法主要有以下几类：  基于bitmap的访存模式记录：包括SMS、Bingo、PMP等； 基于delta序列的访存模式记录：包括VLDP、SPP等； 基于offset的访存行为记录：包括BOP、Berti等； 数据相关的预取：包括IMP、Gretch等； 另外，还有预取的激进度调节算法（FDP、HPAC）">
+<meta property="og:description" content="除了常规的Stride预取器，论文中提出了很多复合预取器，包括DOL、IPCP等；单独的预取算法主要有以下几类：  基于bitmap的访存模式记录：包括SMS、Bingo、PMP等； 基于delta序列的访存模式记录：包括VLDP、SPP等； 基于offset的访存行为记录：包括BOP、Berti等； 数据相关的预取：包括IMP、Gretch等；  另外，还有预取的激进度调节算法（FDP、HPAC">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-28T06:56:23.994Z">
+<meta property="article:modified_time" content="2023-10-09T07:14:25.675Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -271,7 +271,7 @@
         aria-expanded="true"
       >
         体系结构学习
-        <span class="list-group-count">(4)</span>
+        <span class="list-group-count">(5)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -319,6 +319,15 @@
         </a>
       
     
+      
+      
+        <a href="/2023/10/23/" title="ChampSim学习笔记"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ChampSim学习笔记</span>
+        </a>
+      
+    
   </div>
 
         
@@ -343,7 +352,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年9月28日 下午
+                    本文最后更新于：2023年10月9日 下午
                   
                 
               </p>
@@ -356,9 +365,9 @@
 <li>基于bitmap的访存模式记录：包括SMS、Bingo、PMP等；</li>
 <li>基于delta序列的访存模式记录：包括VLDP、SPP等；</li>
 <li>基于offset的访存行为记录：包括BOP、Berti等；</li>
-<li>数据相关的预取：包括IMP、Gretch等；<br>
-另外，还有预取的激进度调节算法（FDP、HPAC）和其他方法论（PSA）。</li>
+<li>数据相关的预取：包括IMP、Gretch等；</li>
 </ol>
+<p>另外，还有预取的激进度调节算法（FDP、HPAC）和其他方法论（PSA）。</p>
 <h2 id="SMS-2006-ISCA">SMS (2006 ISCA)</h2>
 <p>SMS记录每个区域的访问模式，并在该区域的第一次访问时预取区域内其他Cache行。在训练过程中，其使用AGT表记录特定区域的访问模式：其中Filter表以区域的Tag为索引，记录其第一次访问的PC和偏移；Acc表以区域的Tag为索引，记录超过一次访问的区域，比Filter表多了Pattern域，以bitmap的形式记录访问模式。当该区域内的Cache行被替换时，训练结束。训练成功的表项会被记录到PHT，用于之后的预取。</p>
 <h2 id="VLDP-2015-MICRO">VLDP (2015 MICRO)</h2>
@@ -495,6 +504,12 @@ Gretch有四个关键组件：stride预取器，stride变化的通知机制，AD
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/10/23/" title="ChampSim学习笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ChampSim学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
