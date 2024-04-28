@@ -16,21 +16,21 @@
   <meta name="author" content="亮亮678">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ChampSim是基于trace的模拟器。在main()函数中处理输入的参数，生成运行环境gen_environment、运行阶段phases和运行的trace traces，将这些内容带入champsim::main()开始模拟，其中调用champsim::do_phase()模拟每个阶段，并收集模拟的结果。 ChampSim中所有可操作的对象都继承于抽象类operable，其中包括初始化ini">
+    <meta name="description" content="primal_bea_mpp 在该函数中对边的信息进行处理，我们主要关心以下代码。对边的访问是顺序的，即arc-&gt;ident、arc-&gt;cost、arc-&gt;head、arc-&gt;tail的访问是跨步访问，而arc-&gt;head-&gt;potential和arc-&gt;tail-&gt;potential是基于跨步访问的指针访问（简称*B[i]）。另外，该结构体的跨步访">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ChampSim学习笔记">
-<meta property="og:url" content="https://liangliang678.github.io/2023/10/23/index.html">
+<meta property="og:title" content="SPEC2006中mcf和libquantum访存行为分析">
+<meta property="og:url" content="https://liangliang678.github.io/2023/11/16/index.html">
 <meta property="og:site_name" content="亮亮678的博客">
-<meta property="og:description" content="ChampSim是基于trace的模拟器。在main()函数中处理输入的参数，生成运行环境gen_environment、运行阶段phases和运行的trace traces，将这些内容带入champsim::main()开始模拟，其中调用champsim::do_phase()模拟每个阶段，并收集模拟的结果。 ChampSim中所有可操作的对象都继承于抽象类operable，其中包括初始化ini">
+<meta property="og:description" content="primal_bea_mpp 在该函数中对边的信息进行处理，我们主要关心以下代码。对边的访问是顺序的，即arc-&gt;ident、arc-&gt;cost、arc-&gt;head、arc-&gt;tail的访问是跨步访问，而arc-&gt;head-&gt;potential和arc-&gt;tail-&gt;potential是基于跨步访问的指针访问（简称*B[i]）。另外，该结构体的跨步访">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-27T03:02:29.387Z">
+<meta property="article:published_time" content="2023-11-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-28T09:54:11.353Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>ChampSim学习笔记 - 亮亮678的博客</title>
+  <title>SPEC2006中mcf和libquantum访存行为分析 - 亮亮678的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ChampSim学习笔记"></span>
+            <span id="subtitle" data-typed-text="SPEC2006中mcf和libquantum访存行为分析"></span>
           
         </div>
 
@@ -198,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-23 00:00" pubdate>
-          2023-10-23
+        <time datetime="2023-11-16 00:00" pubdate>
+          2023-11-16
         </time>
       </span>
     
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          3.8k 字
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          14 分钟
+          32 分钟
         
       </span>
     
@@ -321,10 +321,10 @@
     
       
       
-        <a href="/2023/10/23/" title="ChampSim学习笔记"
+        <a href="/2023/11/16/" title="SPEC2006中mcf和libquantum访存行为分析"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">ChampSim学习笔记</span>
+          <span class="category-post">SPEC2006中mcf和libquantum访存行为分析</span>
         </a>
       
     
@@ -347,12 +347,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ChampSim学习笔记</h1>
+            <h1 style="display: none">SPEC2006中mcf和libquantum访存行为分析</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月27日 上午
+                    本文最后更新于：2024年4月28日 下午
                   
                 
               </p>
@@ -360,18 +360,20 @@
             
               <div class="markdown-body">
                 
-                <p>ChampSim是基于trace的模拟器。在<code>main()</code>函数中处理输入的参数，生成运行环境<code>gen_environment</code>、运行阶段<code>phases</code>和运行的trace <code>traces</code>，将这些内容带入<code>champsim::main()</code>开始模拟，其中调用<code>champsim::do_phase()</code>模拟每个阶段，并收集模拟的结果。</p>
-<p>ChampSim中所有可操作的对象都继承于抽象类<code>operable</code>，其中包括初始化<code>initialize()</code>、阶段开始<code>begin_phase()</code>、进行操作<code>operate()</code>、阶段结束<code>end_phase()</code>和死锁处理<code>print_deadlock()</code>，其通过<code>Builder</code>生成类方法来初始化。<code>champsim::do_phase()</code>中依次调用每个可操作对象进行操作，并读取trace，判断死锁和结束模拟等。</p>
-<h2 id="O3-CPU">O3_CPU</h2>
-<p>O3_CPU是模拟的CPU流水线，其包括DIB、IFETCH_BUFFER、DISPATCH_BUFFER、DECODE_BUFFER、ROB、LQ、SQ等队列和L1I、L1D总线。</p>
-<p><code>init_instruction()</code>将指令的ip送到IFETCH_BUFFER中，通过调用<code>do_predict_branch()</code>进行分支预测，分支预测使用BTB和主预测器，在预测跳转时还会调用ICache预取器。</p>
-<p><code>check_dib()</code>检查IFETCH_BUFFER中的指令是否最近被译码过并存储在DIB中。<code>fetch_instruction()</code>以行为单位将IFETCH_BUFFER中的指令从ICache取回。<code>promote_to_decode()</code>将取回的指令送到DECODE_BUFFER。<code>decode_instruction()</code>将指令从DECODE_BUFFER发至DISPATCH_BUFFER，并计算BTB分支误预测惩罚，将译码后的指令添加到DIB。</p>
-<p><code>dispatch_instruction()</code>取出DISPATCH_BUFFER中的指令，判断ROB、LQ、SQ是否有空，将指令发至ROB和访存队列中，记录指令的依赖关系，其中发至访存队列的操作由<code>do_memory_scheduling()</code>完成，对于load指令，除了发至LQ外还需要从SQ中查找前递的数据。<code>exec_instruction()</code>将准备好执行的指令加上执行延迟，对于访存指令而言是准备访存的虚地址。<code>operate_lsq()</code>执行访存指令，对于操作数准备好的store指令，释放与它相关的load指令，对于操作数准备好的load指令，发送至DCache，对于退休的store指令，发送至DCache。</p>
-<p><code>complete_inflight_instruction()</code>完成指令的执行，将依赖于本条指令的指令置为准备好，并计算分支预测错误的惩罚。<code>handle_memory_return()</code>处理ICache和DCache返回的内容，分别将IFETCH_BUFFER和LQ中的指令标为已取回。<code>retire_rob()</code>退休指令。</p>
-<h2 id="CACHE">CACHE</h2>
-<p>CACHE是模拟的各级Cache和TLB，其中包含内部预取队列<code>internal_PQ</code>，正在查询Tag的队列<code>inflight_tag_check</code>，等待地址转换的队列<code>translation_stash</code>等。</p>
-<p><code>operate()</code>中先处理下层返回的数据和地址转换结果，然后处理refill，从<code>translation_stash</code>、上层的请求队列和内部的预取队列中选出请求进行tag对比，并发送地址翻译请求，<code>translation_stash</code>存储未按时完成的地址翻译，等待翻译完成后重新进行tag对比。</p>
-<p><code>handle_fill()</code>将MSHR中的数据填回Cache中，替换及写回victim行。<code>try_hit()</code>将查找Cache，判断是否命中。<code>handle_miss()</code>将缺失的信息填至MSHR。<code>handle_write()</code>将写请求直接发至下层。</p>
+                <h2 id="primal-bea-mpp"><code>primal_bea_mpp</code></h2>
+<p>在该函数中对边的信息进行处理，我们主要关心以下代码。对边的访问是顺序的，即<code>arc-&gt;ident</code>、<code>arc-&gt;cost</code>、<code>arc-&gt;head</code>、<code>arc-&gt;tail</code>的访问是跨步访问，而<code>arc-&gt;head-&gt;potential</code>和<code>arc-&gt;tail-&gt;potential</code>是基于跨步访问的指针访问（简称*B[i]）。另外，该结构体的跨步访问步长很大（以MB为单位）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C">arc = arcs + group_pos;<br><span class="hljs-keyword">for</span>( ; arc &lt; stop_arcs; arc += nr_group )<br>&#123;<br>    <span class="hljs-keyword">if</span>( arc-&gt;ident &gt; BASIC )<br>    &#123;<br>        <span class="hljs-comment">/* red_cost = bea_compute_red_cost( arc ); */</span><br>        red_cost = arc-&gt;cost - arc-&gt;tail-&gt;potential + arc-&gt;head-&gt;potential;<br>        <span class="hljs-keyword">if</span>( bea_is_dual_infeasible( arc, red_cost ) )<br>        &#123;<br>            basket_size++;<br>            perm[basket_size]-&gt;a = arc;<br>            perm[basket_size]-&gt;cost = red_cost;<br>            perm[basket_size]-&gt;abs_cost = ABS(red_cost);<br>        &#125;<br>    &#125;<br>    <br>&#125;<br><br>在反汇编中，<span class="hljs-number">266</span>c、<span class="hljs-number">2674</span>、<span class="hljs-number">2678</span>、<span class="hljs-number">267</span>c即四个跨步访问的load指令，<span class="hljs-number">2680</span>、<span class="hljs-number">2684</span>即两个基于跨步访问的指针访问的load指令。<br><br>``` <span class="hljs-keyword">asm</span><br><span class="hljs-number">12000265</span>c:   <span class="hljs-number">400009</span>a0    beqz    $r13,<span class="hljs-number">8</span>(<span class="hljs-number">0x8</span>) # <span class="hljs-number">120002664</span> &lt;primal_bea_mpp+<span class="hljs-number">0x124</span>&gt;<br><span class="hljs-number">120002660</span>:   <span class="hljs-number">580039</span>c4    beq $r14,$r4,<span class="hljs-number">56</span>(<span class="hljs-number">0x38</span>) # <span class="hljs-number">120002698</span> &lt;primal_bea_mpp+<span class="hljs-number">0x158</span>&gt;<br><span class="hljs-number">120002664</span>:   <span class="hljs-number">0010</span>c58c    add.d   $r12,$r12,$r17<br><span class="hljs-number">120002668</span>:   <span class="hljs-number">6</span>c005d86    bgeu    $r12,$r6,<span class="hljs-number">92</span>(<span class="hljs-number">0x5c</span>) # <span class="hljs-number">1200026</span>c4 &lt;primal_bea_mpp+<span class="hljs-number">0x184</span>&gt;<br><span class="hljs-number">12000266</span>c:   <span class="hljs-number">2400198</span>e    ldptr.w $r14,$r12,<span class="hljs-number">24</span>(<span class="hljs-number">0x18</span>)<br><span class="hljs-number">120002670</span>:   <span class="hljs-number">67f</span>ff40e    bge $r0,$r14,<span class="hljs-number">-12</span>(<span class="hljs-number">0x3fff4</span>) # <span class="hljs-number">120002664</span> &lt;primal_bea_mpp+<span class="hljs-number">0x124</span>&gt;<br><span class="hljs-number">120002674</span>:   <span class="hljs-number">28</span>c02190    ld.d    $r16,$r12,<span class="hljs-number">8</span>(<span class="hljs-number">0x8</span>)<br><span class="hljs-number">120002678</span>:   <span class="hljs-number">28</span>c0418f    ld.d    $r15,$r12,<span class="hljs-number">16</span>(<span class="hljs-number">0x10</span>)<br><span class="hljs-number">12000267</span>c:   <span class="hljs-number">2600018</span>d    ldptr.d $r13,$r12,<span class="hljs-number">0</span><br><span class="hljs-number">120002680</span>:   <span class="hljs-number">26000210</span>    ldptr.d $r16,$r16,<span class="hljs-number">0</span><br><span class="hljs-number">120002684</span>:   <span class="hljs-number">260001</span>ef    ldptr.d $r15,$r15,<span class="hljs-number">0</span><br><span class="hljs-number">120002688</span>:   <span class="hljs-number">0011</span>c1ad    sub.d   $r13,$r13,$r16<br><span class="hljs-number">12000268</span>c:   <span class="hljs-number">0010b</span>dad    add.d   $r13,$r13,$r15<br><span class="hljs-number">120002690</span>:   <span class="hljs-number">67f</span>fcda0    bge $r13,$r0,<span class="hljs-number">-52</span>(<span class="hljs-number">0x3ffcc</span>) # <span class="hljs-number">12000265</span>c &lt;primal_bea_mpp+<span class="hljs-number">0x11c</span>&gt;<br><span class="hljs-number">120002694</span>:   <span class="hljs-number">5f</span>ffd1c8    bne $r14,$r8,<span class="hljs-number">-48</span>(<span class="hljs-number">0x3ffd0</span>) # <span class="hljs-number">120002664</span> &lt;primal_bea_mpp+<span class="hljs-number">0x124</span>&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="sort-basket"><code>sort_basket</code></h2>
+<p>该函数是快速排序，访问<code>perm[i]-&gt;abs_cost</code>有时是*B[i]的形式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">long</span> l, r;<br><span class="hljs-type">cost_t</span> cut;<br>BASKET *xchange;<br><br>l = min; r = max;<br><br>cut = perm[ (<span class="hljs-type">long</span>)( (l+r) / <span class="hljs-number">2</span> ) ]-&gt;abs_cost;<br><br><span class="hljs-keyword">do</span><br>&#123;<br>    <span class="hljs-keyword">while</span>( perm[l]-&gt;abs_cost &gt; cut )<br>        l++;<br>    <span class="hljs-keyword">while</span>( cut &gt; perm[r]-&gt;abs_cost )<br>        r--;<br>        <br>    <span class="hljs-keyword">if</span>( l &lt; r )<br>    &#123;<br>        xchange = perm[l];<br>        perm[l] = perm[r];<br>        perm[r] = xchange;<br>    &#125;<br>    <span class="hljs-keyword">if</span>( l &lt;= r )<br>    &#123;<br>        l++; r--;<br>    &#125;<br><br>&#125;<br><span class="hljs-keyword">while</span>( l &lt;= r );<br><br><span class="hljs-keyword">if</span>( min &lt; r )<br>    sort_basket( min, r );<br><span class="hljs-keyword">if</span>( l &lt; max &amp;&amp; l &lt;= B )<br>    sort_basket( l, max ); <br></code></pre></td></tr></table></figure>
+<h2 id="refresh-potential"><code>refresh_potential</code></h2>
+<p>该函数深度优先搜索计算节点的信息。搜索过程中对节点的访问是pointer-chasing形式（<code>node = node-&gt;child</code>），而访问节点的信息是基于pointer-chasing的指针访问（<code>node-&gt;basic_arc-&gt;cost</code>和<code>node-&gt;pred-&gt;potential</code>）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">while</span>( node != root )<br>&#123;<br>    <span class="hljs-keyword">while</span>( node )<br>    &#123;<br>        <span class="hljs-keyword">if</span>( node-&gt;orientation == UP )<br>            node-&gt;potential = node-&gt;basic_arc-&gt;cost + node-&gt;pred-&gt;potential;<br>        <span class="hljs-keyword">else</span> <span class="hljs-comment">/* == DOWN */</span><br>        &#123;<br>            node-&gt;potential = node-&gt;pred-&gt;potential - node-&gt;basic_arc-&gt;cost;<br>            checksum++;<br>        &#125;<br><br>        tmp = node;<br>        node = node-&gt;child;<br>    &#125;<br>    <br>    node = tmp;<br><br>    <span class="hljs-keyword">while</span>( node-&gt;pred )<br>    &#123;<br>        tmp = node-&gt;sibling;<br>        <span class="hljs-keyword">if</span>( tmp )<br>        &#123;<br>            node = tmp;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>            node = node-&gt;pred;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在反汇编中，0bd4是pointer-chasing访问的load指令，0bec、0bf0、0bf4是基于pointer-chasing访问的跨步访问的load指令，0bf8、0bfc是基于pointer-chasing访问的指针访问的load指令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs asm">120000bd4:   28c0418f    ld.d    $r15,$r12,16(0x10)<br>120000bd8:   0011c1ce    sub.d   $r14,$r14,$r16<br>120000bdc:   2700018e    stptr.d $r14,$r12,0<br>120000be0:   02c00484    addi.d  $r4,$r4,1(0x1)<br>120000be4:   400031e0    beqz    $r15,48(0x30) # 120000c14 &lt;refresh_potential+0x80&gt;<br>120000be8:   001501ec    move    $r12,$r15<br>120000bec:   28c0618d    ld.d    $r13,$r12,24(0x18)<br>120000bf0:   28c0c190    ld.d    $r16,$r12,48(0x30)<br>120000bf4:   2400098f    ldptr.w $r15,$r12,8(0x8)<br>120000bf8:   260001ae    ldptr.d $r14,$r13,0<br>120000bfc:   26000210    ldptr.d $r16,$r16,0<br>120000c00:   5fffd5f1    bne $r15,$r17,-44(0x3ffd4) # 120000bd4 &lt;refresh_potential+0x40&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="libquantum">libquantum</h2>
+<p>libquantum中最常见的访存行为如下所示，将值从内存中取出，进行一些运算后若满足条件则存回内存中。由于跨步访问的步长是16B，一个Cache行只会使用到4次，对访存子系统和DRAM造成了很大的压力。</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-number">120001354</span>:   <span class="hljs-number">2600018d</span>    ldptr<span class="hljs-number">.</span>d $<span class="hljs-built_in">r13</span>,$<span class="hljs-built_in">r12</span>,<span class="hljs-number">0</span><br><span class="hljs-number">120001358</span>:   001491ae    <span class="hljs-keyword">and</span> $<span class="hljs-built_in">r14</span>,$<span class="hljs-built_in">r13</span>,$<span class="hljs-built_in">r4</span><br>12000135c:   001595ad    <span class="hljs-keyword">xor</span> $<span class="hljs-built_in">r13</span>,$<span class="hljs-built_in">r13</span>,$<span class="hljs-built_in">r5</span><br><span class="hljs-number">120001360</span>:   400009c0    beqz    $<span class="hljs-built_in">r14</span>,<span class="hljs-number">8</span>(<span class="hljs-number">0x8</span>) # <span class="hljs-number">120001368</span> &lt;quantum_cnot+<span class="hljs-number">0xb8</span>&gt;<br><span class="hljs-number">120001364</span>:   <span class="hljs-number">2700018d</span>    stptr<span class="hljs-number">.</span>d $<span class="hljs-built_in">r13</span>,$<span class="hljs-built_in">r12</span>,<span class="hljs-number">0</span><br><span class="hljs-number">120001368</span>:   02c0418c    addi<span class="hljs-number">.</span>d  $<span class="hljs-built_in">r12</span>,$<span class="hljs-built_in">r12</span>,<span class="hljs-number">16</span>(<span class="hljs-number">0x10</span>)<br>12000136c:   5fffe98f    bne $<span class="hljs-built_in">r12</span>,$<span class="hljs-built_in">r15</span>,-<span class="hljs-number">24</span>(<span class="hljs-number">0x3ffe8</span>) # <span class="hljs-number">120001354</span> &lt;quantum_cnot+<span class="hljs-number">0xa4</span>&gt;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -410,8 +412,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ChampSim学习笔记</div>
-      <div>https://liangliang678.github.io/2023/10/23/</div>
+      <div>SPEC2006中mcf和libquantum访存行为分析</div>
+      <div>https://liangliang678.github.io/2023/11/16/</div>
     </div>
     <div class="license-meta">
       
@@ -423,7 +425,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月23日</div>
+          <div>2023年11月16日</div>
         </div>
       
       
