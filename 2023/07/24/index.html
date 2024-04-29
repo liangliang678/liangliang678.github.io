@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言 数据预取的目的是增加同时进行的访存数量，提高访存带宽的利用率。数据预取通常有三个衡量指标：覆盖率，准确率和及时性。覆盖率一般定义为Cache缺失中能够进行数据预取的比例，准确率指预取的Cache行被使用到的比例，覆盖率和准确率一般是此消彼长的关系。及时性指的是预取是否能够完全覆盖访存的延迟，及时性不可简单的二分为及时和不及时，因为不及时的预取也可以覆盖一部分访存延迟。 此处需要说明，覆盖率、">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-28T09:54:11.344Z">
+<meta property="article:modified_time" content="2024-04-29T05:59:03.925Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -352,7 +352,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月28日 下午
+                    本文最后更新于：2024年4月29日 下午
                   
                 
               </p>
@@ -379,7 +379,7 @@
 <p>SMS通过记录每个区域的访问模式来进行预取，在这类预取器中，关键的设计在于如何索引记录访问模式的预取表。SMS认为PC+Offset的索引是最优的。</p>
 <p>在训练过程中，其使用AGT表记录特定区域的访问模式：其中Filter表以区域的Tag为索引，记录其第一次访问偏移；Acc表以区域的Tag为索引，记录超过一次访问的区域，比Filter表多了Pattern域，以bitmap的形式记录访问模式。该结构可以过滤仅访问一次的区域，减小Acc表的读写压力。当该区域内的Cache行被替换时，训练结束。训练成功的表项会被记录到PHT，用于之后的预取。</p>
 <p>此类预取器在一个区域内没有先后顺序的记录，因此及时性方面差强人意，且需要记录的访存模式也较多，面积开销大。</p>
-<h2 id="Bingo-2019-HPCA">Bingo (2019 HPCA)</h2>
+<h3 id="Bingo-2019-HPCA">Bingo (2019 HPCA)</h3>
 <p>Bingo是SMS的扩展，其不仅将PC+Offset作为触发条件，还将更严格的PC+Addr（或更宽松的PC/Addr/Offset）作为触发条件，并优先使用更严格的触发条件对应的访存模式进行预取。</p>
 <p>虽然使用了不同的触发条件，但Bingo只需要使用一张表来记录访存模式，因为由PC+Addr可以推算出PC+Offset。由PC+Offset的哈希值作为索引，并以PC+Addr作为Tag，查询时优先比较完整的Tag，若无满足，再比较只包含PC+Offset的Tag。</p>
 <p>Bingo将TAGE的思想迁移到数据预取中，有较强的创新性，但还是面临SMS一样的问题，及时性无法得到满足。</p>
@@ -433,7 +433,7 @@ Gretch有四个关键组件：stride预取器，stride变化的通知机制，AD
 <p>使用预取的准确率、及时性和Cache污染情况来控制预取的激进度和预取的Cache行在LRU算法中的初始位置。</p>
 <h3 id="HPAC-2009-MICRO">HPAC (2009 MICRO)</h3>
 <p>使用预取的准确率、使用DRAM Bank情况、造成其他核Cache污染的情况、造成其他核DRAM Bank阻塞的情况来控制预取的激进度并覆盖核内的预取调节机制。</p>
-<h2 id="CLIP-2023-MICRO">CLIP (2023 MICRO)</h2>
+<h3 id="CLIP-2023-MICRO">CLIP (2023 MICRO)</h3>
 <p>本文认为原有的基于准确率的预取调节机制粒度不够细，而基于关键Load的预取调节机制普遍忽略了程序执行时的Load关键性的变化。本文提出了基于关键Load的预取调节机制，将阻塞ROB的L2/LLC缺失的Load指令标记为关键的Load指令，并使用关键预测器，以Load指令的IP、虚地址、分支历史和Load关键性历史为索引来预测程序动态执行过程中Load指令关键性的变化。预取准确率的统计也是逐IP进行的，只有准确率高且关键的指令才能进行预取。</p>
 <h2 id="组合预取器和其他杂项">组合预取器和其他杂项</h2>
 <h3 id="DOL-2018-ISCA">DOL (2018 ISCA)</h3>
@@ -459,7 +459,7 @@ Gretch有四个关键组件：stride预取器，stride变化的通知机制，AD
 </li>
 </ul>
 <p>三个预取器的共同部分构成直接映射的64项IP表，而全局信息使用直接映射的8项RST表，CPLX预取器使用128项的CSPT表。第一拍并行查询IP表和RST表，GS的优先级更高。若第一拍未命中，第二拍查询CSPT表。IPCP也可应用于L2 Cache以进一步提高性能。</p>
-<h2 id="PSA-2022-MICRO">PSA (2022 MICRO)</h2>
+<h3 id="PSA-2022-MICRO">PSA (2022 MICRO)</h3>
 <p>该论文提出将页大小的信息送至L2C/LLC的预取器中，使之跨4K页边界进行预取，可以在不修改预取器的情况下进一步提升只基于物理地址的L2C/LLC预取器的性能。其也探究了根据页大小修改预取器代码的方案。</p>
 
                 
