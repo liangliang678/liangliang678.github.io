@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言 数据预取的目的是增加同时进行的访存数量，提高访存带宽的利用率。数据预取通常有三个衡量指标：覆盖率，准确率和及时性。覆盖率一般定义为Cache缺失中能够进行数据预取的比例，准确率指预取的Cache行被使用到的比例，覆盖率和准确率一般是此消彼长的关系。及时性指的是预取是否能够完全覆盖访存的延迟，及时性不可简单的二分为及时和不及时，因为不及时的预取也可以覆盖一部分访存延迟。 此处需要说明，覆盖率、">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-29T05:59:03.925Z">
+<meta property="article:modified_time" content="2024-05-13T09:12:00.398Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.7k 字
+          8k 字
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          56 分钟
+          67 分钟
         
       </span>
     
@@ -352,7 +352,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月29日 下午
+                    本文最后更新于：2024年5月13日 下午
                   
                 
               </p>
@@ -428,6 +428,29 @@ IMP的工作流程分为三步：</p>
 Gretch有四个关键组件：stride预取器，stride变化的通知机制，ADT和RT来存储识别访问模式需要的数据和生成预取请求，独立的训练逻辑。 当Stride预取器通知步长发生变化时，进入记录模式，此时ADT记录每条指令的最初两个Cache缺失的地址和数据；当ADT满或者Cache缺失过多时，进入训练模式，基于ADT中数据识别基于指针的（<code>*B[i]</code>）和基于数组间接访问的（<code>A[B[i]]</code>）访问模式，记录到RT中。相比于IMP，Gretch使用了乘除法器来识别所有的步长。在RT中的表项达到一定的置信度时，即开始预取。</p>
 <p>Gretch有四个关键组件：stride预取器，stride变化的通知机制，ADT和RT来存储识别访问模式需要的数据和生成预取请求，独立的训练逻辑。 当Stride预取器通知步长发生变化时，进入记录模式，此时ADT记录每条指令的最初两个Cache缺失的地址和数据；当ADT满或者Cache缺失过多时，进入训练模式，基于ADT中数据识别基于指针的（<code>*B[i]</code>）和基于数组间接访问的（<code>A[B[i]]</code>）访问模式，记录到RT中。相比于IMP，Gretch使用了乘除法器来识别所有的步长。在RT中的表项达到一定的置信度时，即开始预取。</p>
 <h2 id="时间相关的预取">时间相关的预取</h2>
+<h3 id="GHB-2004-HPCA">GHB (2004 HPCA)</h3>
+<p>GHB提出了一种方法论，使用FIFO来存储预取信息而不是基于表格存储预取信息。这一方法论不仅适用于Markov预取器等temporal预取，也可以适用于Stride预取。</p>
+<p>GHB使用地址和/或PC来索引Index表，得到这个属性在GHB中的位置。GHB顺序记录每一个缺失地址，并通过指针指向上一个具有相同属性的表项。当属性是PC时，我们就可以得到这一PC的地址序列，识别其访存模式；当属性是地址时，我们就可以得到这一地址和其他地址的correlation。</p>
+<h3 id="ISB-2013-MICRO">ISB (2013 MICRO)</h3>
+<p>ISB认为GHB的结构不利于缓存目前用得到的元数据（地址在TLB中的），也不利于PC局部的地址关联。因此提出了中间层“结构地址”，将分散的物理地址映射为连续的结构地址。</p>
+<p>当同一个PC的物理地址A-&gt;B出现时，查询A和B的结构地址是否连续，若不连续则减小B的结构地址的置信度直至将B的结构地址改为A之后的位置。若A未分配结构地址，则为其分配256个连续的结构地址备用。</p>
+<p>但这篇论文未解决其提出的“方便与TLB同步”的特性，而且将简单的问题复杂化。</p>
+<h3 id="MISB-2019-ISCA">MISB (2019 ISCA)</h3>
+<p>MISB相较于ISB更有效地管理了元数据，其使用了nextline预取来隐藏从片外取回元数据的延迟，而不是和TLB进行同步，因为后者会导致大量无用的元数据被填入元数据缓存中。另外，使用LRU替换算法对元数据缓存进行替换，并对片外的元数据查询采取Bloom Filter过滤来减少带宽开销。</p>
+<h3 id="Domino-2018-HPCA">Domino (2018 HPCA)</h3>
+<p>Domino提出使用一个缺失地址去索引temporal预取元数据是不准确的，经常不能找到正确的后继地址从而丢失了预取的机会。但使用两个缺失地址来索引元数据会丢失流开始的两次预取机会，因此的Domino选择了使用一个或者两个缺失地址来索引。</p>
+<p>在元数据存储中，使用第一个缺失地址来索引到一个“超级表项”，若没有第二个缺失地址，则选择“超级表项”中第一个表项的预取地址；若有则对比第二个缺失地址，选中比中的表项的预取地址。</p>
+<h3 id="Triage-2019-MICRO">Triage (2019 MICRO)</h3>
+<p>Triage首次提出了将预取元数据放在片内缓存中，即使用一部分LLC的容量来存储预取元数据。</p>
+<p>Triage观察到只有少量元数据对temporal预取起到关键作用，所以通过Hawkeye替换算法精细并细粒度的存储预取元数据可以极大的减少预取元数据的数量。Triage维护每个PC的上一个地址，并逐PC来建立地址的依赖关系。地址的依赖关系以表格的形式压缩存储在LLC中。Hawkeye替换算法可以模拟不同LLC容量的预取元数据的效果，从而动态调节预取元数据占用的路数。</p>
+<p>本论文中Hawkeye替换算法在硬件上难以实现，且未计算tag压缩的开销。</p>
+<h3 id="Triage-ISR-2021-TC">Triage-ISR (2021 TC)</h3>
+<p>Triag-ISR相较Triage做了如下改进：</p>
+<ul>
+<li>在元数据中增加了步长和长度，以适应temporal和spatial混合出现的流</li>
+<li>使用Bloom Filter来实现LLC的动态调节</li>
+<li>使用哈希来均衡每一个set的元数据数量</li>
+</ul>
 <h2 id="数据预取的激进度调节">数据预取的激进度调节</h2>
 <h3 id="FDP-2007-HPCA">FDP (2007 HPCA)</h3>
 <p>使用预取的准确率、及时性和Cache污染情况来控制预取的激进度和预取的Cache行在LRU算法中的初始位置。</p>
