@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言 数据预取的目的是增加同时进行的访存数量，提高访存带宽的利用率。数据预取通常有三个衡量指标：覆盖率，准确率和及时性。覆盖率一般定义为Cache缺失中能够进行数据预取的比例，准确率指预取的Cache行被使用到的比例，覆盖率和准确率一般是此消彼长的关系。及时性指的是预取是否能够完全覆盖访存的延迟，及时性不可简单的二分为及时和不及时，因为不及时的预取也可以覆盖一部分访存延迟。 此处需要说明，覆盖率、">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-13T09:12:00.398Z">
+<meta property="article:modified_time" content="2024-07-28T05:00:07.479Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -210,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8k 字
+          9.5k 字
         
       </span>
     
@@ -221,7 +221,7 @@
         
         
         
-          67 分钟
+          79 分钟
         
       </span>
     
@@ -294,10 +294,10 @@
     
       
       
-        <a href="/2023/11/16/" title="SPEC2006中m访存行为分析"
+        <a href="/2023/11/16/" title="SPEC2006中访存行为分析"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">SPEC2006中m访存行为分析</span>
+          <span class="category-post">SPEC2006中访存行为分析</span>
         </a>
       
     
@@ -325,7 +325,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年5月13日 下午
+                    本文最后更新于：2024年7月28日 下午
                   
                 
               </p>
@@ -386,20 +386,30 @@
 <p>Berti基于每条指令训练其最佳的delta：使用时间戳来记录取回一个Cache行需要的周期数。对于一条指令的每次访存，使用PC来索引16路8组的history表，在history表中记录其地址和时间戳，同时搜索history表以将找到的至多8个及时的delta填入16项全相联的delta表中，并计算每个delta的覆盖率。访存指令执行时，根据每个delta的覆盖率和L1 MSHR的占用率将预取请求发送到不同的Cache层次。</p>
 <p>本论文引入了新颖的逐PC训练的delta的概念，但最大问题在于低估了history和delta表的面积。8组history表一般只能记录8个PC的访存序列，即使两个PC复用一组也只有16个PC；16项delta表代表最多只能追踪16个访存流。这与工业界的趋势不符，局限性较强。</p>
 <h2 id="数据相关的预取">数据相关的预取</h2>
+<h3 id="Dependence-Based-Prefetching-（1998-ASPLOS）">Dependence Based Prefetching （1998 ASPLOS）</h3>
+<p>本文将生产者-消费者load指令对分为recurrent，traversal, data三类，并对前两类对MLP影响较大的load指令进行预取。</p>
+<p>通过记录最近的load指令的写回值，并将提交的load指令的base地址与记录的返回值对比，即可识别到生产者-消费者load指令对。对于是识别到的特定load指令，一旦数据准备好就进行预取。</p>
+<p>该文认为预取深度为1即可极大增加MLP，但随着处理器并行度的增加，这一点不再成立。</p>
+<h3 id="CDP-2002-ASPLOS">CDP (2002 ASPLOS)</h3>
+<p>本文提出将返回L2的Cache行的数据进行检测，如果高比特与Cache行的地址相同，则认为这个数据是一个指针，将其作为地址进行预取。</p>
+<p>预取可以递归进行，但有固定的最大深度。为避免预取断流，使用额外的比特标记预取的Cache行和它的预取深度，若demand请求命中预取的Cache行，则重新检测指针并发送预取。</p>
 <h3 id="IMP-2015-MICRO">IMP (2015 MICRO)</h3>
-<p>不规则的内存访问在目前的应用中很常见，特别是在机器学习、图分析和稀疏矩阵中。访问图中的相邻节点或稀疏矩阵中非零数据对应的数组元素通常通过间接索引的方式完成，如<code>A[B[i]]</code>。其中B数组存放在连续的地址空间内，可以通过stride预取器完成预取；而L1 DCache不能容纳整个A数组，且对A数组的访问不是连续的，造成大量的Cache缺失。<br>
-<code>A[B[i]]</code>形式的访问可记为<code>ADDR(A[B[i]]) = (B[i] &lt;&lt; shift) + BaseAddr</code>。在实践中，<code>B[i]</code>通常是提前算好的，那么我们可以在软件访问<code>B[i]</code>时预取<code>B[i+Δ]</code>并根据学习到的<code>shift</code>和<code>BaseAddr</code>预取<code>A[B[i+Δ]]</code>。<br>
-IMP的工作流程分为三步：</p>
+<p>不规则的内存访问在目前的应用中很常见，特别是在机器学习、图分析和稀疏矩阵中。访问图中的相邻节点或稀疏矩阵中非零数据对应的数组元素通常通过间接索引的方式完成，如<code>A[B[i]]</code>。其中B数组存放在连续的地址空间内，可以通过stride预取器完成预取；而L1 DCache不能容纳整个A数组，且对A数组的访问不是连续的，造成大量的Cache缺失。</p>
+<p><code>A[B[i]]</code>形式的访问可记为<code>ADDR(A[B[i]]) = (B[i] &lt;&lt; shift) + BaseAddr</code>。在实践中，<code>B[i]</code>通常是提前算好的，那么我们可以在软件访问<code>B[i]</code>时预取<code>B[i+Δ]</code>并根据学习到的<code>shift</code>和<code>BaseAddr</code>预取<code>A[B[i+Δ]]</code>。</p>
+<p>IMP的工作流程分为三步：</p>
 <ol>
 <li>传统预取器中的stride表捕捉stride访问模式</li>
 <li>检测与stride访问模式相关联的间接访问模式。捕捉索引-地址对来计算<code>shift</code>和<code>BaseAddr</code>并存在Indirect表中</li>
-<li>根据Indirect表中的内容进行预取<br>
-捕捉索引-地址对是流程中最困难的部分，观察到索引一定是由stride预取得到的，地址一般是索引访问后短时间内Cache缺失的地址，我们的IPD的工作模式如下：表中的每个条目负责一个间接访问模式，当一个stride预取的<code>B[i]</code>被访问时，将<code>B[i]</code>的值写到<code>idx1</code>域中，侦听之后的Cache缺失地址，根据所有可能的<code>shift</code>计算对应的<code>BaseAddr</code>并记录；当这个stride预取的<code>B[i+1]</code>被访问时，将<code>B[i+1]</code>的值写到<code>idx2</code>域中，侦听之后的Cache缺失地址，根据所有可能的shift计算对应的BaseAddr并记录；比较两次记录在相同<code>shift</code>下的<code>BaseAddr</code>是否有一样的，若存在则在Indirect表中记录对应的<code>shift</code>和<code>BaseAddr</code>并删除IPD中的条目，若不存在则等待<code>B[i+2]</code>被访问后抛弃这个条目。随后在Indirect表中记录之后的访存命中该间接访问模式的次数，达到一定的置信度阈值后即开始预取，并逐渐增加预取的距离。另外，作者也提出了针对嵌套循环中的间接访问模式和多路、多层间接访问模式的优化，针对Sector Cache实现粒度预测器的优化。</li>
+<li>根据Indirect表中的内容进行预取</li>
 </ol>
+<p>捕捉索引-地址对是流程中最困难的部分，观察到索引一定是由stride预取得到的，地址一般是索引访问后短时间内Cache缺失的地址，IPD的工作模式如下：表中的每个条目负责一个间接访问模式，当一个stride预取的<code>B[i]</code>被访问时，将<code>B[i]</code>的值写到<code>idx1</code>域中，侦听之后的Cache缺失地址，根据所有可能的<code>shift</code>计算对应的<code>BaseAddr</code>并记录；当这个stride预取的<code>B[i+1]</code>被访问时，将<code>B[i+1]</code>的值写到<code>idx2</code>域中，侦听之后的Cache缺失地址，根据所有可能的shift计算对应的BaseAddr并记录；比较两次记录在相同<code>shift</code>下的<code>BaseAddr</code>是否有一样的，若存在则在Indirect表中记录对应的<code>shift</code>和<code>BaseAddr</code>并删除IPD中的条目，若不存在则等待<code>B[i+2]</code>被访问后抛弃这个条目。随后在Indirect表中记录之后的访存命中该间接访问模式的次数，达到一定的置信度阈值后即开始预取，并逐渐增加预取的距离。另外，作者也提出了针对嵌套循环中的间接访问模式和多路、多层间接访问模式的优化，针对Sector Cache实现粒度预测器的优化。</p>
 <h3 id="Gretch（2021-TACO）">Gretch（2021 TACO）</h3>
-<p>在不同的图分析框架中，有不同类型的数据相关的内存访问（DDA），例如<code>A[B[i]]</code>和<code>*B[i]</code>。先前的工作大多只关注其中的一种，而且需要软件制导，也不适用于乱序的内存访问。<br>
-Gretch有四个关键组件：stride预取器，stride变化的通知机制，ADT和RT来存储识别访问模式需要的数据和生成预取请求，独立的训练逻辑。 当Stride预取器通知步长发生变化时，进入记录模式，此时ADT记录每条指令的最初两个Cache缺失的地址和数据；当ADT满或者Cache缺失过多时，进入训练模式，基于ADT中数据识别基于指针的（<code>*B[i]</code>）和基于数组间接访问的（<code>A[B[i]]</code>）访问模式，记录到RT中。相比于IMP，Gretch使用了乘除法器来识别所有的步长。在RT中的表项达到一定的置信度时，即开始预取。</p>
-<p>Gretch有四个关键组件：stride预取器，stride变化的通知机制，ADT和RT来存储识别访问模式需要的数据和生成预取请求，独立的训练逻辑。 当Stride预取器通知步长发生变化时，进入记录模式，此时ADT记录每条指令的最初两个Cache缺失的地址和数据；当ADT满或者Cache缺失过多时，进入训练模式，基于ADT中数据识别基于指针的（<code>*B[i]</code>）和基于数组间接访问的（<code>A[B[i]]</code>）访问模式，记录到RT中。相比于IMP，Gretch使用了乘除法器来识别所有的步长。在RT中的表项达到一定的置信度时，即开始预取。</p>
+<p>在不同的图分析框架中，有不同类型的数据相关的内存访问（DDA），例如<code>A[B[i]]</code>和<code>*B[i]</code>。先前的工作大多只关注其中的一种，而且需要软件制导，也不适用于乱序的内存访问。</p>
+<p>Gretch有四个关键组件：stride预取器，stride变化的通知机制，ADT和RT来存储识别访问模式需要的数据和生成预取请求。当Stride预取器通知步长发生变化时，进入记录模式，此时ADT记录每条指令的最初两个Cache缺失的地址和数据；当ADT满或者Cache缺失过多时，进入训练模式，基于ADT中数据识别基于指针的（<code>*B[i]</code>）和基于数组间接访问的（<code>A[B[i]]</code>）访问模式，记录到RT中。相比于IMP，Gretch使用了乘除法器来识别所有的步长。在RT中的表项达到一定的置信度时，即开始预取。</p>
+<h3 id="DMP-2024-HPCA">DMP (2024 HPCA)</h3>
+<p>本文提出了一种新的间接访存预取器，其通过比较生产者和消费者的地址差值序列来识别生产者消费者对。被识别为stride类型的load指令和被识别为消费者的指令都可以成为潜在的生产者，进入Index Table进行识别。潜在的生产者执行后的一定窗口内，miss数量最多的load指令被认为是潜在的消费者，进入Target Table进行识别。</p>
+<p>潜在的生产者的返回值的差值被记录在一个FIFO中，期间需要去除重复的元素来规避分支错误的干扰。潜在的消费者的地址也被记录在一个FIFO中并去除重复元素，同时还要识别连续的地址流以应对一个生产者的数据被用来生成多个连续的索引（ranged）的情况。记录完成之后，将消费者的序列右移0～3位并与生产者的序列进行对比，即可得到生产者和消费者的关系。</p>
+<p>对于已识别的生产者消费者对，通过PSHR记录预取的信息，进行递归的预取。本文的识别策略可以适应multi-way，multi-level，ranged的间接访存模式，并可以识别这些模式混合形成的更复杂模式。</p>
 <h2 id="时间相关的预取">时间相关的预取</h2>
 <h3 id="GHB-2004-HPCA">GHB (2004 HPCA)</h3>
 <p>GHB提出了一种方法论，使用FIFO来存储预取信息而不是基于表格存储预取信息。这一方法论不仅适用于Markov预取器等temporal预取，也可以适用于Stride预取。</p>
@@ -426,35 +436,38 @@ Gretch有四个关键组件：stride预取器，stride变化的通知机制，AD
 </ul>
 <h2 id="数据预取的激进度调节">数据预取的激进度调节</h2>
 <h3 id="FDP-2007-HPCA">FDP (2007 HPCA)</h3>
-<p>使用预取的准确率、及时性和Cache污染情况来控制预取的激进度和预取的Cache行在LRU算法中的初始位置。</p>
+<p>本文使用预取的准确率、及时性和污染情况来调节预取的激进度。预取的准确率使用每个Cache行新增的pref位来统计，预取的及时性使用MSHR中的pref位来统计，预取的污染情况通过Bloom过滤器来统计。</p>
+<p>每4096次LLC访问为一个周期，累计计数器的值给予更近的周期更高的权重。根据这三个计数器与阈值的关系，每个周期结束时动态调整预取的距离，预取的数量和预取的Cache行插入LRU中的位置。</p>
 <h3 id="HPAC-2009-MICRO">HPAC (2009 MICRO)</h3>
-<p>使用预取的准确率、使用DRAM Bank情况、造成其他核Cache污染的情况、造成其他核DRAM Bank阻塞的情况来控制预取的激进度并覆盖核内的预取调节机制。</p>
+<p>本文相较FDP考虑了多核之间共享LLC和DRAM资源对于预取的影响，通过统计各个核预取的准确率，污染其他核LLC数据的情况，占用的内存带宽，需要的内存带宽和其他核总共需要的内存带宽等因素，来全局的调节每个核的预取激进度。</p>
 <h3 id="CLIP-2023-MICRO">CLIP (2023 MICRO)</h3>
-<p>本文认为原有的基于准确率的预取调节机制粒度不够细，而基于关键Load的预取调节机制普遍忽略了程序执行时的Load关键性的变化。本文提出了基于关键Load的预取调节机制，将阻塞ROB的L2/LLC缺失的Load指令标记为关键的Load指令，并使用关键预测器，以Load指令的IP、虚地址、分支历史和Load关键性历史为索引来预测程序动态执行过程中Load指令关键性的变化。预取准确率的统计也是逐IP进行的，只有准确率高且关键的指令才能进行预取。</p>
+<p>现有的数据预取器在多核的情况下对性能有负面影响，而预取调节算法只对准确率较低的Stream、Stride等预取器效果较好，对准确率较高的Berti预取算法效果欠佳。</p>
+<p>本文提出了基于Load指令的关键性（criticality）进行预取调节的算法。已有的Load指令的关键性预测都假设某一个IP的Load指令全部是关键的或是不关键的，但在程序运行的过程中同一个IP的Load指令可能有不同的行为。</p>
+<p>本文首先将阻塞ROB的L1缺失的Load指令送入Criticality Filter进行过滤，若这条Load指令出现阻塞的情况数量达到了阈值，则统计它的预取准确率，只有关键且预取准确率大于90%才能进行预取。另外，使用Load指令的IP、预取地址、32项全局分支历史、32项全局关键性历史组成Criticality Signature查询关键性预测器，动态预测Load指令的关键性。</p>
 <h2 id="组合预取器和其他杂项">组合预取器和其他杂项</h2>
 <h3 id="DOL-2018-ISCA">DOL (2018 ISCA)</h3>
-<p>面向不同模式的预取算法不断被提出，它们有着不同的覆盖率和准确率。本篇论文将多个小范围、高准确率的预取器结合在一起，通过分工的方式实现了较大的覆盖率和较高的准确率。我们可以将已有的访存模式分为四类：stride访问、pointer-chasing访问、iregular访问和region访问。通过复合式预取器，我们可以实现更高的存储效率，优先服务置信度高的预取以减小额外开销，并实现更好的灵活性。</p>
-<p>复合预取器结合了以下预取器：</p>
+<p>面向不同模式的预取算法不断被提出，它们有着不同的覆盖率和准确率。本篇论文将多个小范围、高准确率的预取器结合在一起，通过分工的方式实现了较大的覆盖率和较高的准确率。</p>
+<p>我们可以将已有的访存模式分为四类：stride访问、pointer-chasing访问、iregular访问和region访问。通过复合式预取器，我们可以实现更高的存储效率，优先服务置信度高的预取以减小额外开销，并实现更好的灵活性。复合预取器结合了以下预取器：</p>
 <ol>
 <li>T2预取器：经典的stride预取</li>
-<li>P1预取器：<code>*B[i]</code>和pointer-chasing的预取</li>
+<li>P1预取器：*B[i]和pointer-chasing的预取</li>
 <li>C1预取器：region预取</li>
 </ol>
 <p>使用一个协调器来根据指令选择其中的某个预取器，该协调器使用简单的优先级关系进行选择。现有的集中式预取器并不能很好的成为该复合预取器的子模块，因为它们的大部分工作已经被T2预取器承担。适合作为子模块的预测器应该专注某一个模式的预取（小而美而不是大而全）。</p>
+<p>本文提出的方法论值得借鉴，但设计的子预取器实现非常奇怪，不适用于硬件实现。</p>
 <h3 id="IPCP-2020-ISCA">IPCP (2020 ISCA)</h3>
 <p>IPCP是第三届预取锦标赛的冠军，其出发点是根据IP对每条Load指令的访存模式进行分类，针对每种访存模式设计一种预取器：</p>
 <ul>
-<li>
-<p>CS预取器：固定stride类型的Load指令</p>
-</li>
-<li>
-<p>CPLX预取器：复杂stride类型的Load指令，使用<code>signature</code>域来记录历史stride序列，索引到预测的stride</p>
-</li>
-<li>
-<p>GS预取器：基于全局的访存信息，标记区域内被访问到的Cache行，并通过继承关系将相邻的区域标记为“稠密”以触发预取；所有触发了该预取器的IP会被记录为<code>stream valid</code>。</p>
-</li>
+<li>CS预取器：固定stride类型的Load指令</li>
+<li>CPLX预取器：复杂stride类型的Load指令，使用<code>signature</code>域来记录历史stride序列，索引到预测的stride</li>
+<li>GS预取器：基于全局的访存信息，标记区域内被访问到的Cache行，并通过继承关系将相邻的区域标记为“稠密”以触发预取；所有触发了该预取器的IP会被记录为<code>stream valid</code>。</li>
 </ul>
 <p>三个预取器的共同部分构成直接映射的64项IP表，而全局信息使用直接映射的8项RST表，CPLX预取器使用128项的CSPT表。第一拍并行查询IP表和RST表，GS的优先级更高。若第一拍未命中，第二拍查询CSPT表。IPCP也可应用于L2 Cache以进一步提高性能。</p>
+<h3 id="Pythia-2021-MICRO">Pythia (2021 MICRO)</h3>
+<p>本文利用强化学习的方法，将多种程序行为和系统状态作为模型的输入，使模型输出最佳的预取偏移。强化学习的算法是模型基于目前的状态，贪心（但概率）地采取具有最大的Q值的行为，行动会对状态产生影响并产生一个反馈奖励，指导模型通过公式修改Q值。</p>
+<p>在数据预取中，状态包括控制流的信息（指令的PC和历史情况），数据流的信息（地址和页内偏移等）以及系统状态（内存带宽利用率）。每一个访存执行时，通过这些状态（概率地）选择Q值最大的动作（预取偏移）。准确且及时的预取，准确但不及时的预取，超出页边界的预取，不准确的预取或不预取都会产生不同的反馈奖励，修改模型的Q值。</p>
+<p>硬件上，使用QVStore存储每个(状态,动作)对对应的Q值，为了避免状态空间的增加导致QVStore空间指数增大，将每一个状态的内容分别存储，以最大的Q值作为最终Q值。在一个状态存储的内部，通过算法将其分为不同的平面，每个平面的Q值总和作为这个状态的Q值。查询和计算每一个动作的Q值的操作是流水化的。</p>
+<p>使用EQ来存储最近做出的预取决定，因为奖励反馈不一定是立即产生的，需要等到demand请求到达才能做出并修改QVStore。本文也提出了一些自动探索超级参数的算法。</p>
 <h3 id="PSA-2022-MICRO">PSA (2022 MICRO)</h3>
 <p>该论文提出将页大小的信息送至L2C/LLC的预取器中，使之跨4K页边界进行预取，可以在不修改预取器的情况下进一步提升只基于物理地址的L2C/LLC预取器的性能。其也探究了根据页大小修改预取器代码的方案。</p>
 
@@ -540,9 +553,9 @@ Gretch有四个关键组件：stride预取器，stride变化的通知机制，AD
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/16/" title="SPEC2006中m访存行为分析">
+                      <a href="/2023/11/16/" title="SPEC2006中访存行为分析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SPEC2006中m访存行为分析</span>
+                        <span class="hidden-mobile">SPEC2006中访存行为分析</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

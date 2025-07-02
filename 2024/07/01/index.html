@@ -1,0 +1,968 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="亮亮678">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="面试不通过：百度昆仑芯，联芸科技 排序不通过：小米，阿里平头哥，海光，进迭时空 已发offer：华为海思（已签），阿里达摩院，中科睿芯，乐鑫科技，算能科技 华为海思 数字芯片 7.31投递 9.19笔试（数电、验证） 9.21测评 10.14线下一面：  自我介绍，没有具体介绍项目，只是简单的讲了项目的部分内容，以及对各类预取器的理解 研究生上了什么课程，一个与非门有几个CMOS管 笔试：8-bi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招记录">
+<meta property="og:url" content="https://liangliang678.github.io/2024/07/01/index.html">
+<meta property="og:site_name" content="亮亮678的博客">
+<meta property="og:description" content="面试不通过：百度昆仑芯，联芸科技 排序不通过：小米，阿里平头哥，海光，进迭时空 已发offer：华为海思（已签），阿里达摩院，中科睿芯，乐鑫科技，算能科技 华为海思 数字芯片 7.31投递 9.19笔试（数电、验证） 9.21测评 10.14线下一面：  自我介绍，没有具体介绍项目，只是简单的讲了项目的部分内容，以及对各类预取器的理解 研究生上了什么课程，一个与非门有几个CMOS管 笔试：8-bi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-02T06:32:18.404Z">
+<meta property="article:author" content="亮亮678">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>秋招记录 - 亮亮678的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"liangliang678.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>亮亮678的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="秋招记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-01 00:00" pubdate>
+          2024-07-01
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          57 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">秋招记录</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2025年7月2日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>面试不通过：百度昆仑芯，联芸科技<br>
+排序不通过：小米，阿里平头哥，海光，进迭时空<br>
+已发offer：华为海思（已签），阿里达摩院，中科睿芯，乐鑫科技，算能科技</p>
+<h2 id="华为海思">华为海思</h2>
+<p>数字芯片<br>
+7.31投递 9.19笔试（数电、验证） 9.21测评</p>
+<p>10.14线下一面：</p>
+<ul>
+<li>自我介绍，没有具体介绍项目，只是简单的讲了项目的部分内容，以及对各类预取器的理解</li>
+<li>研究生上了什么课程，一个与非门有几个CMOS管</li>
+<li>笔试：8-bits的序列检测</li>
+<li>反问了北京和上海的工作内容有无区别</li>
+</ul>
+<p>10.14线下二面：</p>
+<ul>
+<li>具体介绍了项目的算法，在纸上画了一些例子，但没有问的很细节，对一些关键点进行了提问</li>
+<li>笔试：可以前递的同步FIFO</li>
+<li>反问了设计组和架构组的合作</li>
+</ul>
+<p>10.15线下三面：</p>
+<ul>
+<li>自我介绍，看过预取领域的哪些论文，有哪些大学/教授在研究这个领域</li>
+<li>除了预取以外，CPU核内提升性能还有什么手段</li>
+<li>项目中架构规划，设计实现，功能验证和时序磨合各占了多少时间</li>
+<li>了不了解华为的加班情况，意向地点</li>
+<li>反问了搬迁青浦和架构/设计合作的问题，主管也介绍了华为在上海的布局</li>
+</ul>
+<p>11.14保温，看来给不到预期薪资。<br>
+12.2开奖：地点青浦，月薪基础24k+绩效6k，年终奖0-10w，公积金按基础工资5%，每个月应该会有2-4个周六的加班费。没有告知职级，但看薪资的话是15级，已经超出预期了。<br>
+12.3谈薪：地点青浦不愿意去，和HR沟通后表示薪资基本是今年的最高档，没有涨的空间，拒绝后部门主管电话告知可以协调至金桥，并在第一年多发5w年终奖。<br>
+12.12签三方</p>
+<h2 id="小米未来星">小米未来星</h2>
+<p>芯片架构师<br>
+7.23投递 9.3简历挂</p>
+<h2 id="小米硬件提前批">小米硬件提前批</h2>
+<p>处理器设计工程师<br>
+6.29投递 7.1测评 7.13笔试（数电、模电、电路原理等）</p>
+<p>7.27一面，试图联系HR改时间，但HR电话不接，短信不回，邮件不看。面试的时候面试官未开摄像头，未自我介绍，面试过程一整个照本宣科，感觉有点KPI。</p>
+<ul>
+<li>自我介绍</li>
+<li>用PPT介绍项目并针对项目提问（感觉面试官方向不对口，所以提问比较表面，没有深入询问项目）</li>
+<li>冷场一分钟不知道问啥，然后让我再讲讲简历里提到但PPT里没写的项目（凑时长）</li>
+<li>项目中遇到了什么困难，是怎么解决的</li>
+<li>你的同学、同事有没有比你优秀的，你准备怎么继续追赶他们</li>
+<li>为什么希望加入小米</li>
+<li>有什么问题（具体做cpu还是xpu还是soc？各个base是做什么的？），感觉答得很敷衍</li>
+</ul>
+<p>8.3二面，效率挺高的，但面试都是周末。主管面，面试官很友好，友好到我对一面的经历都有点改观了。</p>
+<ul>
+<li>不用介绍项目的具体内容，挑一两个亮点，面试官根据你讲的内容针对性的提问（指针类的数据预取通用性如何？SpinalHDL怎么样？模拟器如何验证数据预取的性能？），面试官还会总结你说的内容，体验很好</li>
+<li>也面试了几个你们实验室的同学，有的偏向产业，有的偏向学术，你们实验室是怎么安排的？你从龙芯来小米，有什么诉求，城市的选择如何？</li>
+<li>对小米还有什么问题？（买IP做SoC还是自研IP？先买做第一版，然后自研；我主要是CPU方向，和你们的SoC、xPU方向match吗？CPU方向也有，其他方向共通，肯定能胜任）。</li>
+</ul>
+<p>8.22 HR面，表示想在上海工作，HR告诉我设计部门在北京和西安，架构部门在上海。架构部门的校招只开了未来星计划招博士，不过可以帮我联系ESL部门负责人给我加面。</p>
+<p>8.23加面，负责人简单考察了一下（项目中最大的收获、一些项目细节），但和负责人交流后感觉方向不匹配，联系HR转回设计岗，但后续一直无进展。</p>
+<h2 id="vivo">vivo</h2>
+<p>芯片设计工程师<br>
+8.22投递 8.23测评 后续一直无进展</p>
+<h2 id="百度AIDU">百度AIDU</h2>
+<p>2025AIDU-芯片前端设计方向<br>
+7.1投递 后续一直无进展</p>
+<h2 id="百度昆仑芯正式批">百度昆仑芯正式批</h2>
+<p>上海-芯片设计及架构工程师（昆仑芯）<br>
+7.8投递 8.8测评</p>
+<p>8.1一面：一直想换一个岗位投递，但HR不理我。面试官挺好的，氛围比较轻松，方向也比较对口，问的问题比较具体，但感觉有些问题更像是想知道龙芯的架构细节，和我的能力无关。</p>
+<ul>
+<li>自我介绍</li>
+<li>介绍了一个项目，面试官中途会随时打断问细节，对我负责的模块（数据预取）简单问了一下，对和我相关的模块（访存流水线，一级和二级缓存）更感兴趣，比较关注整体的开发流程，包括如何定位性能瓶颈，如何分析程序行为等。有时候涉及龙芯的具体架构细节和工艺我也只能说“我知道但不方便透露”，或者说上一代的参数（毕竟是公开可以测出来的）。</li>
+<li>一道简单的流水线控制的题目</li>
+<li>准备结束的时候说虽然研究的内容比较窄，但工作量还是比较大，问我考不考虑留龙芯，说完原因后我说其实对整个处理器核也比较熟悉，还有一个项目没有介绍</li>
+<li>简单介绍了另一个项目，简单提问了一下</li>
+<li>有什么问题（是不是也在做RV的处理器核？是，预研；北京和上海的项目不同还是远程？远程）</li>
+</ul>
+<p>8.12二面：电话面试，面试官虽然对数据预取领域没有了解，但还是会耐心提问和听你讲解。</p>
+<ul>
+<li>自我介绍</li>
+<li>为什么不留在龙芯</li>
+<li>按照简历上的项目逐个详细提问</li>
+<li>有什么问题（转做xpu会有障碍吗？架构有相似性。交流了下目前国内做CPU的企业情况。）</li>
+</ul>
+<p>8.16三面：电话面试，问题比较杂，不关注技术细节，更关注个人能力。</p>
+<ul>
+<li>挑选一个项目讲讲你遇到的困难和收获</li>
+<li>对于未来的规划，为什么不读博士，希望走什么技术路线</li>
+<li>对于团队合作的一些问题，例如分工、工作量、遇到分歧的解决方式</li>
+<li>提问相关领域，包括协处理器、指令集、性能建模、性能分析等，以及与编译、验证等团队有无交流</li>
+<li>对于国产CPU、GPU和AI处理器的看法，能否落地</li>
+<li>有什么问题（昆仑芯的RV核的用途？CE。AI处理器外部客户多吗？大于50%。）</li>
+</ul>
+<p>8.28共享中。三面挂EXCUSE ME？感觉三轮面试都聊的挺好的，不过方向上的确不算特别符合，而且面试中我也表示更愿意继续做CPU方向。</p>
+<p>10.12正式批笔试拒。</p>
+<h2 id="腾讯青云">腾讯青云</h2>
+<p>硬件开发-芯片设计方向<br>
+7.1投递 7.1测评 后续一直无进展</p>
+<h2 id="字节跳动">字节跳动</h2>
+<p>芯片工程师-芯片研发<br>
+8.6投递 8.29线下沟通感觉方向不匹配 9.18简历挂</p>
+<h2 id="阿里达摩院">阿里达摩院</h2>
+<p>计算机体系结构工程师<br>
+8.21投递</p>
+<p>8.30一面：</p>
+<ul>
+<li>上来就先做题：米利型和摩尔型状态机有什么区别；使用摩尔型状态机检测序列5’b10100</li>
+<li>自我介绍，介绍项目，根据项目进行提问</li>
+<li>有什么问题（玄铁团队？对。应用场景？嵌入式等，高性能核不便透露。对于大量15分左右RV初创的看法和玄铁的优势？没怎么回答。）</li>
+</ul>
+<p>9.4二面，主管面：</p>
+<ul>
+<li>随便聊了会，问了问3A6000的重命名宽度、访存延迟等，龙芯这边团队规模，设计和验证的比例等</li>
+<li>问我是不是有一个PPT，然后用PPT介绍了一下数据预取优化的项目</li>
+<li>介绍了一下达摩院的业务，加了微信，说想和我们组毕业的其他人也聊聊，让我发一下名字</li>
+</ul>
+<p>9.24 HR面：</p>
+<ul>
+<li>HR首先介绍了后续的流程，表示春招的实习生转正比较多，秋招的HC很少。尽量在9月30号之前谈offer，最晚在10月15号之前。</li>
+<li>自我介绍，为什么不留在龙芯，为什么选择达摩院，其他家谈的怎么样，实习和实验室的工作有什么区别，项目中遇到什么困难。</li>
+<li>反问环节问了应届生的培养</li>
+</ul>
+<p>10.28 意向书<br>
+11.4 沟通预期薪资<br>
+11.13 正式offer：30k*16+5w签字费，12%公积金，各类补贴较多，杭州市也有应届生补贴。<br>
+12.9-10 谈薪：可以多加5w签字费，定级p5+年终奖比较可观。主管也极力挽留，但最终没有选择达摩院。</p>
+<h2 id="阿里平头哥">阿里平头哥</h2>
+<p>芯片设计工程师<br>
+8.22投递</p>
+<p>9.2一面：</p>
+<ul>
+<li>自我介绍，介绍项目，根据项目提问，并扩展提问LSU的整体架构和Cache中MSHR的设计细节</li>
+<li>setup和hold的概念，dc时序报告主要关注哪些延迟，clock uncertainty和clock skew的概念，reset应该怎么做</li>
+<li>有什么问题（平头哥在上海有什么业务？都有，AI加速多点，CPU少；转做GPGPU、加速器难度？IP核内的技术有相似，访存、调度之类。设计和架构怎么合作？架构宏观总体方向，设计负责具体模块的设计实现。）</li>
+</ul>
+<p>9.14二面：</p>
+<ul>
+<li>简单介绍了项目，因为面试的是AI/GPGPU部门，项目方向也不匹配，没有太多的提问。比较关注电路的具体设计，例如两种预取器有什么电路是复用的等等</li>
+<li>问了很多八股，包括：一个16位加法器如何做两个8位的加法；A/B两种数据共享的SRAM buffer如何优先发送A；各种仲裁器的优缺点</li>
+<li>平头哥有CPU，为什么来面试AI/GPGPU部门，除了城市选择你觉得AI这个方向怎么样；有什么offer了吗；反问环节问了架构和设计人员的合作，团队规模（涉密没说）</li>
+<li>第一次觉得自己面试表现不够好，因为他们的确比较关注电路细节，这方面我了解的不够深入</li>
+</ul>
+<p>9.27 HR面：</p>
+<ul>
+<li>自我介绍，学习情况，公司实习和实验室的工作如何平衡</li>
+<li>实习过程中遇到的困难，提炼出来是什么？领导和同事对你的评价怎么样，包括优缺点</li>
+<li>对于AI处理器这个方向怎么看？对于芯片前端设计方面你的优势是什么？对于设计和验证的工作这么看？</li>
+<li>生活中对你影响比较大的人，有什么爱好</li>
+<li>反问：流程（只说十月会联系，感觉已挂）；应届生培养（虚拟项目）；杭州有吗（应届生不知道，总之各业务都有）。</li>
+</ul>
+<p>后续无进展</p>
+<h2 id="阿里云">阿里云</h2>
+<p>芯片研发工程师<br>
+8.21投递 8.22简历挂</p>
+<h2 id="蔚来">蔚来</h2>
+<p>数字芯片设计工程师<br>
+7.26投递 8.1简历挂</p>
+<h2 id="理想">理想</h2>
+<p>芯片研发工程师-杭州<br>
+7.28投递 后续一直无进展</p>
+<h2 id="联发科技">联发科技</h2>
+<p>数字IC工程师（设计方向）<br>
+7.17投递 7.30笔试（数字电路、编程、项目介绍、逻辑推理） 后续一直无进展</p>
+<h2 id="英伟达">英伟达</h2>
+<p>Hardware Architect - IP<br>
+8.14投递 后续一直无进展</p>
+<h2 id="ARM-China">ARM China</h2>
+<p>Design Engineer<br>
+9.3投递 后续一直无进展</p>
+<h2 id="中兴微电子">中兴微电子</h2>
+<p>数字IC开发工程师（处理器）<br>
+7.8投递 9.9测评</p>
+<p>10.31询问意向，后续一直无进展</p>
+<h2 id="中兴通讯">中兴通讯</h2>
+<p>IC开发工程师（智算）<br>
+7.22投递 9.2简历挂</p>
+<h2 id="飞腾">飞腾</h2>
+<p>集成电路逻辑设计工程师（25届提前批）<br>
+7.22投递 后续一直无进展</p>
+<h2 id="海光信息">海光信息</h2>
+<p>前端芯片设计工程师<br>
+8.14投递 8.14笔试（设计、验证）</p>
+<p>9.22线下一面和HR面，线下等待时间太长，而且分配的面试官方向不匹配：</p>
+<ul>
+<li>自我介绍，面试官表示不要介绍项目中的技术，只介绍论文中的技术</li>
+<li>目前各大厂商都在设计高性能总线（CXL，NvLink等），总线设计主要关注什么指标？CPU的各级缓存的延迟是多少？竞争冒险如何解决？</li>
+<li>你们团队的规模和分工是怎么样的？如果你是项目负责人，项目中有员工的进度落后怎么办</li>
+<li>反问环节问了设计和架构的合作以及加班情况，感觉加班较为严重，和绩效强挂钩</li>
+<li>HR面：家乡和工作地点选择？为什么不留在龙芯？职业生涯的规划？期望薪资，为什么报这个数？兴趣爱好？</li>
+</ul>
+<p>10.9测评 后续无进展</p>
+<h2 id="寒武纪">寒武纪</h2>
+<p>高性能处理器设计工程师<br>
+7.31投递 后续一直无进展</p>
+<h2 id="中科睿芯">中科睿芯</h2>
+<p>9.1校友会投递，9.13中关村线下面试，两位面试官：</p>
+<ul>
+<li>在白板上介绍了自己的两个项目，没想到他们对本科毕设的项目也感兴趣，面试官专业性方面也还行，的确是懂技术的</li>
+<li>反问环节感觉他们的业务还行，比RV的初创好点，至少在信创领域有一些客户</li>
+</ul>
+<p>9.19线上二面，一位技术负责人，一位面试官，一位HR：</p>
+<ul>
+<li>简单介绍研究生期间的项目情况</li>
+<li>除了数据预取，还有哪些影响CPU性能的关键设计；访存违例如何避免；对多核和一致性方面有没有了解</li>
+<li>负责人介绍了睿芯的情况，RV的IP核的应用场景和主要客户，公司的竞争力等；表示希望和我保持沟通，可以作为特例讨论薪资，以及等待其他家offer出来后进一步沟通</li>
+<li>负责人和HR询问了选择offer看重哪些，对于龙芯以及其他企业的看法，目前的offer情况</li>
+</ul>
+<p>10.9 询问了工作地点和薪资待遇，北京总包40-45W，已拒。</p>
+<h2 id="商汤科技">商汤科技</h2>
+<p>芯片研发工程师<br>
+8.20投递 后续一直无进展</p>
+<h2 id="地平线">地平线</h2>
+<p>IP设计工程师<br>
+8.9投递 8.19简历挂</p>
+<h2 id="芯动科技">芯动科技</h2>
+<p>数字IC设计工程师<br>
+7.29投递 后续一直无进展</p>
+<h2 id="芯原股份">芯原股份</h2>
+<p>数字前端设计/验证工程师（上海）<br>
+7.29投递 8.25笔试（设计、验证） 后续一直无进展</p>
+<h2 id="峰岹科技">峰岹科技</h2>
+<p>数字IC设计工程师<br>
+8.1投递 后续一直无进展</p>
+<h2 id="乐鑫科技">乐鑫科技</h2>
+<p>数字IC设计工程师<br>
+8.1投递 8.8笔试（数电）</p>
+<p>8.27一面：把5点面试看成7点了，在实习公司的领导车上接到HR电话真的尴尬住了，迟到10分钟，直接用手机现场下载Teams接入了，边讲边捣鼓半天也没开启摄像头，也没法展示PPT，一整个手忙脚乱，但面试官人挺好</p>
+<ul>
+<li>自我介绍</li>
+<li>逐个介绍简历上的项目，针对项目进行了一些提问，感觉提问的专业性比我目前面过的大厂（小米、百度）还高一点</li>
+<li>介绍一下乱序流水线的整个流程。不要ROB行不行（我觉得是不行，但在面试官的提示下，如果软件不care这种乱序的状态的话，也不要求精确异常的话，好像也行？）</li>
+<li>有什么问题（1. 公司的RV MCU如何迭代？针对软件负载进行自定义指令加速，也计划做高性能核。2. 自定义指令是否有兼容性问题？软件是自己写的。3. 自研RV内核相比购买ARM的IP核有什么优势？更好控制成本，软件兼容上的确ARM更好，但IoT都是自己的软件 4. 询问工作内容，是否会需要做核外的IP？不用。5. 高性能核的应用场景？准备做路由器。）</li>
+</ul>
+<p>9.23二面：至今最难的一场面试，全英文，面试官是CPU研发负责人，印度人</p>
+<ul>
+<li>面试官先详细介绍了他们团队的情况（前两代处理器核是顺序的，第三代在研是乱序的），才让我自我介绍，感觉还是比较有诚意的</li>
+<li>乱序处理器中有哪些影响性能的设计？（我没想到我用英文都表达不出）</li>
+<li>一些处理器中基础的问题：如何解决数据冲突，前递通路，乱序处理器如何精确异常，写回和写穿透Cache等</li>
+<li>一些电路题：mux可以模拟latch吗？（不会）有没有做过跨时钟域的设计？（没有）always@(clk) d&lt;=q是综合出来什么？（不会）RTL如何生成随机数？（LFSR）组合环怎么解？</li>
+<li>反问：高性能核的用途？（边缘AI的控制核）为什么不买IP？（有300多条定制的指令）</li>
+</ul>
+<p>9.27 HR面：</p>
+<ul>
+<li>自我介绍，学校的情况</li>
+<li>在计算机领域学习了六七年，对整个人生有什么影响？对职业生涯是怎么规划的？如何跟上发展的技术？</li>
+<li>对于不同的指令集架构，不同的应用场景，你在工作机会上有什么偏好？目前有哪些在流程中？</li>
+<li>平时的爱好，（应聘的时候喜欢的书写了经济学）对经济学感兴趣？</li>
+<li>对待变化的环境，包括经济上，政治上，技术上，你是怎么看的？</li>
+<li>父母的情况，工作地点的选择，对待加班怎么看？</li>
+<li>反问：应届生培养（没有）；跨国协作怎么做（英语要好）；流程（十月中旬告知是否通过面试，之后来北京线下谈薪）；</li>
+</ul>
+<p>9.30 进入offer评估<br>
+10.11 电话询问三方时间，期望薪资等（报了45W，HR问我是不是搞错公司了，他们是乐鑫科技）<br>
+10.23 线下交流，介绍薪资构成和公司发展前景等，口头意向，表示可以等我的三方<br>
+11.14 结合其他offer情况交流薪资 11.15 通知薪资可以给到32k*15<br>
+11.28 已拒绝</p>
+<h2 id="蓝芯算力">蓝芯算力</h2>
+<p>CPU性能架构师<br>
+8.29投递 后续一直无进展</p>
+<h2 id="算能">算能</h2>
+<p>逻辑设计与验证工程师<br>
+9.2投递 9.12笔试（高中数学物理，好搞笑的笔试）<br>
+9.19 AI面试：第一次收到邮件在垃圾邮件中没看到，重新发了一次</p>
+<ul>
+<li>自我介绍，项目中的困难，对这个行业的看法，为进入这个行业做了什么准备</li>
+<li>用逻辑辨别信息真假的经历（好神经的问题，我直接思考一分钟）；如何向非专业人士解释自己的工作</li>
+</ul>
+<p>10.11 一面：面试官不是做CPU的，不过也还好会结合项目进行提问</p>
+<ul>
+<li>自我介绍，项目介绍，用白板画项目的框图等；面试官不知道SPEC06是什么，让我先介绍一下</li>
+<li>简单问了一些八股，仲裁器的实现，和物理组的合作等</li>
+<li>反问了RISCV CPU的应用场景，如何入局桌面端和服务器市场，工作地点等</li>
+</ul>
+<p>10.16 二面：因面试官原因改了一次时间</p>
+<ul>
+<li>自我介绍，介绍项目，面试官对项目的提问没什么深度，感觉也不算专业</li>
+<li>对于多核一致性的了解，业余爱好，对加班的看法，留实习的公司吗</li>
+<li>介绍了算能自研CPU核的内容，反问了团队规模（几十人），感觉也是草台班子</li>
+</ul>
+<p>11.1 offer：城市任选，工作内容待定；35k（其中绩效30%）+签字费，12%公积金；400餐补+租房补助（7折房租，水电网免费）。已拒绝。</p>
+<h2 id="进迭时空">进迭时空</h2>
+<p>9.6内推投递</p>
+<p>11.25一面：面试官比较专业，的确是做过预取这个方向的：</p>
+<ul>
+<li>和师兄的工作有什么区别，问了两种预取器的设计上的细节</li>
+<li>乱序对预取器设计的影响，预取器和流水线的配合，查询TLB的问题，安全问题</li>
+<li>反问业务和前景</li>
+</ul>
+<p>11.29 CEO面</p>
+<ul>
+<li>怎么知道进迭时空的</li>
+<li>高考排名，小学初中高中的成长经历</li>
+<li>留龙芯的机会，有什么offer吗（说完准备去达摩院后他直接说“那感谢你陪我聊天”）</li>
+<li>反问了RISC-V的机会和生态问题</li>
+</ul>
+<p>12.3 HR沟通意向和预期薪资。后续无进展。</p>
+<h2 id="联荟科技">联荟科技</h2>
+<p>数字电路设计工程师-杭州<br>
+8.2投递</p>
+<p>10.9一面：感觉面试官非常不专业，感觉给他讲项目也是白讲，基本上可以说我在给他上体系结构课</p>
+<ul>
+<li>自我介绍</li>
+<li>介绍项目，提问</li>
+<li>反问业务（做DDR控制器IP、加解密IP等等；内部使用；消费级解决方案较多）</li>
+</ul>
+<p>后续一直无进展</p>
+<h2 id="兆易创新">兆易创新</h2>
+<p>车规数字IC设计工程师<br>
+7.15内推投递 7.17测评 8.20简历挂</p>
+<h2 id="杭州国芯">杭州国芯</h2>
+<p>数字IC设计工程师<br>
+8.20投递 后续一直无进展</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="category-chain-item">技术笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>秋招记录</div>
+      <div>https://liangliang678.github.io/2024/07/01/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>亮亮678</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

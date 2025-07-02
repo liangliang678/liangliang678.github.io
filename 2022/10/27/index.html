@@ -24,7 +24,7 @@
 <meta property="og:description" content="写在前面 《计算机体系结构：量化研究方法》（Computer Architecture: A Quantitative Approach）一直被称为计算机体系结构领域的圣经。在研究生一年级组里没有布置任务，所以购买了英文第六版阅读。本书从指令级并行，数据级并行和任务级并行的角度分析了处理器的设计，并讲解了近年来热门的仓库级计算机和特定领域加速器的内容。在阅读本书之前，应该有计算机组成原理的基础知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-26T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-15T10:45:55.297Z">
+<meta property="article:modified_time" content="2024-07-28T05:00:07.483Z">
 <meta property="article:author" content="亮亮678">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -334,7 +334,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月15日 晚上
+                    本文最后更新于：2024年7月28日 下午
                   
                 
               </p>
@@ -446,7 +446,7 @@
 <p>比较了三个戴尔服务器的各项指标。</p>
 <h2 id="Chapter2-Memory-Hierarchy-Design">Chapter2: Memory Hierarchy Design</h2>
 <h3 id="2-1-Introduction">2.1 Introduction</h3>
-<p>如今的存储器层次结构一般包含“寄存器-L1$-L2$-L3$-内存-硬盘/闪存”几部分，大部分情况下下层的存储器的内容是上层的存储器的内容的超集。尽管近年来单核性能的停滞不前使得处理器和内存之间的“剪刀差”不再扩大，但是多核的趋势其实对内存造成了更大的压力。如今的处理器通过流水化的Cache，更多的Cache层次等方式来解决内存访问的瓶颈，预计使用嵌入式DRAM实现的L4$将会是未来的一个趋势。传统意义上，设计者只需关注Cache的性能，即“内存平均访问时间”，也就是Cache的命中延迟、命中率和缺失惩罚，但如今更大的Cache造成了可观的功耗，在可移动设备的CPU中甚至达到25%-50%，功耗也成为设计者的重要考虑因素之一。</p>
+<p>如今的存储器层次结构一般包含“寄存器-L1\$-L2\$-L3\$-内存-硬盘/闪存”几部分，大部分情况下下层的存储器的内容是上层的存储器的内容的超集。尽管近年来单核性能的停滞不前使得处理器和内存之间的“剪刀差”不再扩大，但是多核的趋势其实对内存造成了更大的压力。如今的处理器通过流水化的Cache，更多的Cache层次等方式来解决内存访问的瓶颈，预计使用嵌入式DRAM实现的L4$将会是未来的一个趋势。传统意义上，设计者只需关注Cache的性能，即“内存平均访问时间”，也就是Cache的命中延迟、命中率和缺失惩罚，但如今更大的Cache造成了可观的功耗，在可移动设备的CPU中甚至达到25%-50%，功耗也成为设计者的重要考虑因素之一。</p>
 <h4 id="Basics-of-Memory-Hierarchies-A-Quick-Review">Basics of Memory Hierarchies: A Quick Review</h4>
 <p>一个Cache行由若干个字组成，其包含一个<code>tag</code>域。最受欢迎的Cache组织结构是组相联结构，直接映射和全相联结构是其特殊情况。Cache的写策略有写回和写穿透，两者都可以用写缓存来加速。</p>
 <p>缺失率是Cache性能的重量衡量指标，根据3C模型将Cache缺失分为三类：强制缺失、容量缺失和冲突缺失。随着超线程和多核技术的广泛应用，我们也可以增加第四个C：一致性缺失。</p>
@@ -656,12 +656,12 @@
 <p>为发挥动态调度的优势，需要多个流水的功能部件以允许多条指令同时执行。<strong>计分板</strong>是最初的动态调度算法，此处我们重点讨论<strong>Tomasulo算法</strong>，它能通过重命名寄存器解决输出相关和反相关，也可以引入猜测执行。</p>
 <h4 id="Dynamic-Scheduling-Using-Tomasulo’s-Approach">Dynamic Scheduling Using Tomasulo’s Approach</h4>
 <p>Tomasulo算法的基本原理是动态判断指令何时准备好执行和使用重命名寄存器来避免不必要的冲突。寄存器重命名会重命名所有目的寄存器，解决WAW和WAR冲突。Tomasulo算法的实现中，寄存器重命名通过保留站实现，保留站可以缓存指令的源操作数。指令发射时，需要它的结果的指令的源操作数被标记为它的保留站号，该指令执行完成后将结果写入这些指令的源操作数域中。</p>
-<p>在Tomasulo算法中，冲突检测和执行控制是分开的，每个功能部件的保留站决定其中的指令是否可以执行；操作数由保留站直接提供给功能部件而不需要经过寄存器堆，意味着需要CDB将功能部件的输出载入到保留站的源操作数域中。</p>
+<p>在Tomasulo算法中，冲突检测和执行控制是分开的，每个功能部件的保留站决定其中的指令是否可以执行；操作数由保留站直接提供给功能部件而不需要经过寄存器堆，意味着需要结果总线将功能部件的输出载入到保留站的源操作数域中。</p>
 <p>Tomasulo算法主要包含三步：</p>
 <ul>
 <li>发射（分发）：将指令从IQ中发送到保留站中（如果有空位），如果源操作数已准备好，则读取寄存器，如果未准备好，则记录相应的保留站号</li>
 <li>执行：将准备好的指令发送到功能部件</li>
-<li>写回：将结果发送到CDB上</li>
+<li>写回：将结果发送到结果总线上</li>
 </ul>
 <p>Tomasulo算法导致了相关的指令之间至少有一拍的延迟。</p>
 <h3 id="3-5-Dynamic-Scheduling-Examples-and-the-Algorithm">3.5 Dynamic Scheduling: Examples and the Algorithm</h3>
@@ -687,7 +687,7 @@
 <ol>
 <li>发射（分发）：从IQ中获取指令，将其发送到保留站和ROB中</li>
 <li>执行：等待操作数准备好后发送到功能部件</li>
-<li>写回：将结果发送到CDB上</li>
+<li>写回：将结果发送到结果总线上</li>
 <li>提交：指令位于ROB头且结果已准备好时即可提交，若是分支预测错则取消后续指令</li>
 </ol>
 <p>引入ROB还可以支持精确例外。为了提高流水线的效率，分支指令预测错会在执行时就清除后续指令，因为分支指令预测错比例外出现的更多。为了维持访存指令的顺序性，我们要求：</p>
@@ -774,7 +774,7 @@
 <h4 id="Multiple-Lanes-Beyond-One-Element-per-Clock-Cycle">Multiple Lanes: Beyond One Element per Clock Cycle</h4>
 <p>使用多条通道可以加速向量指令的执行，每条通道包括向量寄存器堆的读写端口和每个向量执行部件的一条流水线。每个向量寄存器的0号元素都使用通道0，如此定位可以避免跨通道的通讯（前递），减少连线开销。</p>
 <h4 id="Vector-Length-Registers-Handling-Loops-Not-Equal-to-32">Vector-Length Registers: Handling Loops Not Equal to 32</h4>
-<p>*vector-length register (vl)*控制向量操作的长度。使用strip mining来处理向量长度比mvl大的情况，<em>setvl</em>指令可以简化这个过程。</p>
+<p><code>vector-length register (vl)</code>控制向量操作的长度。使用strip mining来处理向量长度比mvl大的情况，<code>setvl</code>指令可以简化这个过程。</p>
 <h4 id="Predicate-Registers-Handling-IF-Statements-in-Vector-Loops">Predicate Registers: Handling IF Statements in Vector Loops</h4>
 <p>谓词寄存器用于存储向量操作的掩码，初始为全1。</p>
 <h4 id="Memory-Banks-Supplying-Bandwidth-for-Vector-Load-Store-Unit">Memory Banks: Supplying Bandwidth for Vector Load/Store Unit</h4>
@@ -806,7 +806,7 @@
 <p>PTX指令集是硬件指令集的一个抽象，其指令描述单个CUDA线程的操作，与机器指令通常（但不绝对）是一一对应的。PTX指令使用无限多的只写一次寄存器，编译器会为这些寄存器分配物理寄存器，优化器会减少物理寄存器的使用数量。</p>
 <p>PTX指令的格式是<code>opcode.type d, a, b, c</code>，其中d是目的寄存器（store指令除外），a、b、c是源操作数。PTX使用谓词寄存器来实现分支指令。控制流指令包括函数跳转的<code>call</code>和<code>return</code>，线程相关的<code>exit</code>和<code>branch</code>，同步指令<code>bar.sync</code>。GPU的所有访存都是gather-scatter形式的，硬件会识别其空间相关性。</p>
 <h4 id="Conditional-Branching-in-GPUs">Conditional Branching in GPUs</h4>
-<p>GPU相比向量处理器对分支指令有更多的硬件支持。在PTX指令层面，使用<code>branch</code>、<code>call</code>、<code>return</code>和<code>exit</code>指令和每个C线程之间的锁步。在GPU机器指令层面，除了常规的分支指令外，每个SIMD线程还有分支同步栈。对于PTX指令中简单的分支指令，编译器只需使用谓词寄存器；复杂的分支则需要使用分支同步栈，在不同CUDA线程分流时压栈，合流时出栈。分支的层数越多，GPU运算的效率越低，PTX编译器会对分支指令进行编译优化。需要注意的是，同一线程块内的CUDA线程看似是相互独立的，但是在分支中他们是相关的，只有当谓词寄存器中1的比例足够大时，程序才有较好的效率。</p>
+<p>GPU相比向量处理器对分支指令有更多的硬件支持。在PTX指令层面，使用<code>branch</code>、<code>call</code>、<code>return</code>和<code>exit</code>指令和每个线程之间的锁步。在GPU机器指令层面，除了常规的分支指令外，每个SIMD线程还有分支同步栈。对于PTX指令中简单的分支指令，编译器只需使用谓词寄存器；复杂的分支则需要使用分支同步栈，在不同CUDA线程分流时压栈，合流时出栈。分支的层数越多，GPU运算的效率越低，PTX编译器会对分支指令进行编译优化。需要注意的是，同一线程块内的CUDA线程看似是相互独立的，但是在分支中他们是相关的，只有当谓词寄存器中1的比例足够大时，程序才有较好的效率。</p>
 <h4 id="NVIDIA-GPU-Memory-Structures">NVIDIA GPU Memory Structures</h4>
 <p>每一个SIMD通道（即CUDA线程）有单独的内存，称为私有内存，GPU将私有内存缓存在L1和L2 Cache中。每个多线程SIMD处理器有本地内存，其容量较小（48KB左右）但延迟较低，带宽较高；本地内存是线程块动态获取的。GPU内存是所有的线程块共享的，其还能被系统处理器（CPU）读写。GPU将大量晶体管用于寄存器而非L2和L3缓存，并使用多线程来隐藏访存延迟。</p>
 <h4 id="Innovations-in-the-Pascal-GPU-Architecture">Innovations in the Pascal GPU Architecture</h4>
