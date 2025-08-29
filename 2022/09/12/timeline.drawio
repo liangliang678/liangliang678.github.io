@@ -1,0 +1,55 @@
+<mxfile host="65bd71144e">
+    <diagram id="9nH2vB2tpgdBbZ3Kxpj4" name="第 1 页">
+        <mxGraphModel dx="1420" dy="480" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" value="2021.12" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="-70.00158069883526" y="480" width="121.26455906821964" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="2022.1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="-70.00316139767054" y="540" width="121.26455906821964" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="2022.4" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="-70.00244592346087" y="610" width="121.26455906821964" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="2022.5" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="-70.00402662229601" y="700" width="121.26455906821964" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="2022.6" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="-70.00399334442591" y="780" width="121.26455906821964" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="确定&lt;br style=&quot;font-size: 16px;&quot;&gt;设计方案" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="57.00327787021632" y="509.99571428571426" width="121.26455906821964" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="完成各部分代码&lt;br style=&quot;font-size: 16px;&quot;&gt;第一条指令退休" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="42.60106489184693" y="589.9957142857143" width="150.0648918469218" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="成功运行&lt;br style=&quot;font-size: 16px;&quot;&gt;coremark" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="42.60111480865231" y="659.9957142857143" width="150.0648918469218" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="性能调优&lt;br style=&quot;font-size: 16px;&quot;&gt;论文和答辩" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="37.00018302828619" y="749.9957142857143" width="150.0648918469218" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="2022.9" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="-70.00069883527459" y="870" width="121.26455906821964" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="放暑假&lt;br style=&quot;font-size: 16px;&quot;&gt;调试运行Linux内核" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="33.50346089850257" y="829.9957142857143" width="168.25457570715474" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="" style="endArrow=none;html=1;jumpSize=6;strokeWidth=6;strokeColor=default;startArrow=classic;startFill=1;entryX=0;entryY=1;entryDx=0;entryDy=0;fontSize=16;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="33.423710208562014" y="962.9411764705883" as="sourcePoint"/>
+                        <mxPoint x="33.423710208562014" y="415.7142857142857" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="2021.11" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="-41.38139407244786" y="410" width="64.02662229617304" height="55.71428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="项目准备&lt;br style=&quot;font-size: 16px;&quot;&gt;基础知识学习" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="66.14" y="424.29" width="103" height="55.71" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
